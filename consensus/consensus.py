@@ -5,9 +5,36 @@ import matplotlib.pyplot as plt
 import os
 import sys
 import csv
+import subprocess
 import consensus_funcs as modules
 
 def consensus(inputfile: str, outputfile: str, outputdir: str, consensus_option: int, threshold: float, save_figures):
+    """
+    Determines the consensus sequence from a multiple sequence alignment (MSA) file.
+    Args:
+        inputfile (str): Path to the input MSA file.
+        outputfile (str): Path to the output file for the consensus sequence.
+        outputdir (str): Path to the output directory for the generated files.
+        consensus_option (int): Method for determining consensus positions:
+            1: Positions with gap frequencies < threshold (0.5 default, change with -t flag)
+            2: Positions with residue as most frequent character
+            3: Positions with residues in a specific sequence (you will give sequence ID)
+        threshold (float): Gap frequency threshold for consensus_option 1. Must be between 0 and 1.
+        save_figures (bool): Flag indicating whether to save figures.
+    Returns:
+        None
+    Raises:
+        FileNotFoundError: If the input file is not found.
+        ValueError: If the consensus_option is not 1, 2, or 3.
+        ValueError: If the threshold is not between 0 and 1.
+    Notes:
+        - The input file must be in FASTA format.
+        - The sequences in the input MSA must be aligned.
+        - The consensus sequence is determined based on the specified consensus_option.
+        - The generated files include the consensus sequence, residue frequencies, sequence entropies, and gap stripped alignment.
+        - Figures of sequence entropies and gap frequencies can be saved if save_figures is True.
+    """
+    
     #FIGURE SETTINGS
     mpl.rcParams['axes.titlesize'] = 18
     mpl.rcParams['axes.labelsize'] = 18
@@ -219,23 +246,65 @@ def consensus(inputfile: str, outputfile: str, outputdir: str, consensus_option:
         
     print(f'Wrote summary of output to: {out_file_dir}/{out_file_prefix}_consensus_output.txt')
 
+def weblogo(inputfile: str, outputfile: str, resolution: int, filetype: str):
+    """
+    Generates a weblogo image using the specified input file, output file, resolution, and file type.
+
+    Parameters:
+    - inputfile (str): The path to the input file.
+    - outputfile (str): The path to save the generated weblogo image.
+    - resolution (int): The resolution of the weblogo image.
+    - filetype (str): The file type of the output image.
+
+    Returns:
+    None
+    """
+    
+    p_subscript = 'Protein_Sequence_Consensus'
+    weblogo_cline = f'weblogo -f {inputfile} -o {outputfile} -F {filetype} --resolution {resolution} -A protein -P {p_subscript}'
+    try:
+        subprocess.run(weblogo_cline, shell=True)
+    except Exception as e:
+        print(f'Error occurred while running weblogo: {e}')
+    
 
 if __name__ == '__main__':
         
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Determine consensus sequence from a multiple sequence alignment (MSA) and draw summative plots.')
+    subparsers = parser.add_subparsers(dest='command', help='sub-command help')
+    subparsers.required = True
 
-    parser.add_argument('-i', required=True, metavar = 'Input alignment file in FASTA format.', help='Filename for FASTA alignment')
-    parser.add_argument('-o', metavar = 'Output gap stripped FASTA file name', help='Output FASTA filename. If not given will use name of input FASTA file as template to name output files.')
-    parser.add_argument('-O', metavar = 'Output directory', help='Output directory for all output files. If not given will use directory of input FASTA file.')
-    parser.add_argument('-c', default='0', metavar = 'Method for removing insertions', help='Desired method for removing insertions. 1 = Positions with gap frequencies < threshold (0.5 default, change with -t flag). 2 =  Positions with residue as most frequent character. 3 = Positions with residues in a specific sequence. If not given will ask for user input upon running script. See README for further explantion of methods.')
-    parser.add_argument('-t', type=float, default = 0.5, metavar = 'Gap frequency threshold', help='Gap frequecy threshold to define a consensus positions. Only valid for Option 1 for removing insertions. Must be a value between 0 and 1 (default: 0.5)')
-    parser.add_argument('-f', action='store_true', help='Include flag to prevent saving images of MSA data analysis.')
-
+    # Create the parser for subcommand 'consensus'
+    parser_consensus = subparsers.add_parser('consensus', help='Determine consensus sequence from a multiple sequence alignment (MSA) and draw sequence entropy and gap frequency plots.')
+    parser_consensus.add_argument('-i', required=True, metavar = 'Input alignment file in FASTA format.', help='Filename for FASTA alignment')
+    parser_consensus.add_argument('-o', metavar = 'Output gap stripped FASTA file name', help='Output FASTA filename. If not given will use name of input FASTA file as template to name output files.')
+    parser_consensus.add_argument('-O', metavar = 'Output directory', help='Output directory for all output files. If not given will use directory of input FASTA file.')
+    parser_consensus.add_argument('-c', default='0', metavar = 'Method for removing insertions',\
+        help='Desired method for removing insertions.\
+                1 = Positions with gap frequencies < threshold (0.5 default, change with -t flag).\
+                2 =  Positions with residue as most frequent character.\
+                3 = Positions with residues in a specific sequence. If not given will ask for user input upon running script. See README for further explantion of methods.'\
+    )
+    parser_consensus.add_argument('-t', type=float, default = 0.5, metavar = 'Gap frequency threshold', help='Gap frequecy threshold to define a consensus positions. Only valid for Option 1 for removing insertions. Must be a value between 0 and 1 (default: 0.5)')
+    parser_consensus.add_argument('-f', action='store_true', help='Include flag to prevent saving images of MSA data analysis.')
+    parser_consensus.set_defaults(func=lambda args:\
+        consensus(inputfile = args.i, outputfile = args.o, outputdir = args.O, consensus_option = args.c, threshold = args.t, save_figures = args.f))
+    
+    # Create the parser for subcommand 'weblogo'
+    parser_weblogo = subparsers.add_parser('weblogo', help='Generate a weblogo image from an input file.')
+    parser_weblogo.add_argument('-i', required=True, help = 'Input alignment file/self-aligned file in FASTA/text format.', metavar='INPUTFILE')
+    parser_weblogo.add_argument('-o', required=True, help = 'Output filename for weblogo image.', metavar='FILENAME')
+    parser_weblogo.add_argument('-s', default=300, help = 'Resolution of the weblogo image.', metavar='RESOLUTION')
+    parser_weblogo.add_argument('-F', default='png', choices=['png', 'jpeg', 'svg', 'pdf'], help = 'File type of the output image.', metavar='FILETYPE')
+    parser_weblogo.set_defaults(func=lambda args:\
+        weblogo(inputfile = args.i, outputfile = args.o, resolution = args.s, filetype = args.F))
+    
+    
+    # Parse the arguments and call the appropriate function
     args = parser.parse_args()
+    args.func(args)
     
     #Show help if no arguments passed
     if len(sys.argv) < 2:
         parser.print_help()
         sys.exit(1)
-        
-    consensus(inputfile = args.i, outputfile = args.o, outputdir = args.O, consensus_option = args.c, threshold = args.t, save_figures = args.f)
