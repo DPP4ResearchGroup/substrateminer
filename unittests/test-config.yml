@@ -1,0 +1,20 @@
+size:
+  - type: max
+    value: 125
+  - type: min
+    value: 35
+
+cellular_location:  ["cytoplasm"]
+
+motif:
+  type: 'exo'
+  target_motif_type: ['SIGNAL', 'CHAIN', 'PEPTIDE']
+  terminal: 'N'
+  consensus:  ["MS", "MF", "MP", "GS"]
+
+ops:
+  output_dir: 'outputs'
+
+tests:
+  - name: 'test_target_loc_cli'
+    expect_results: 'unittests/expected_test_target_loc_cli.yml'

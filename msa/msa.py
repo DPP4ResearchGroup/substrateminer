@@ -4,6 +4,10 @@ from Bio.Align.Applications import MafftCommandline
 import argparse
 from Bio import SeqIO
 
+import click
+import sys
+
+
 def perform_msa(input_file, output_file, method):
     """
     Perform multiple sequence alignment using ClustalOmega or MAFFT.
@@ -53,7 +57,31 @@ def perform_msa(input_file, output_file, method):
     except Exception as e:
         print(f"An error occurred during multiple sequence alignment: {str(e)}")
 
-if __name__ == "__main__":
+
+@click.command('msa', context_settings=dict(ignore_unknown_options=True))
+@click.argument('args', nargs=-1, type=click.UNPROCESSED)
+def msa_switch(args):
+    """
+    Interface for multi-sequence alignments
+    """
+    
+    msa_click(sys.argv[2:])
+
+def msa_click(args):
+    # debug block
+    #print("%%%%%%%%%%%%%%%%%%%%%%%  DEBUG  %%%%%%%%%%%%%%%%%%%%%%%")
+    #print("click pathway")
+    #print(args)
+    #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    
+    if not any(args):
+        sys.argv = ['msa.py', '-h']
+        
+    sys.argv = ['msa.py'] + list(args)
+    # Perform multiple sequence alignment
+    msa_main()
+    
+def msa_main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="Perform multiple sequence alignment")
     parser.add_argument("-i", "--input", help="Input file path", required=True)
@@ -63,3 +91,16 @@ if __name__ == "__main__":
 
     # Perform multiple sequence alignment
     perform_msa(args.input, args.output, args.method)
+
+if __name__ == "__main__":
+    if sys.argv[1:] and not any(item in ['-h', '--help'] for item in sys.argv[1:]):
+        # debug block
+        print("%%%%%%%%%%%%%%%%%%%%%%%  DEBUG  %%%%%%%%%%%%%%%%%%%%%%%")
+        print("click pathway")
+        #print(sys.argv[1:])
+        #print([item for item in sys.argv[1:]])
+        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+        
+        msa_click(sys.argv[1:])
+    else:
+        msa_main()

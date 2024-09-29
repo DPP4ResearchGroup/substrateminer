@@ -86,7 +86,8 @@ def validate_outputfiletype(ctx, param, value):
     if ctx.params['outputfilename'] and not value:
         return 'fasta'
     return value
-@click.command()
+
+@click.command('miner')
 @click.option('--referencefile', required=True, help='The reference file containing sequences.')
 @click.option('--referencetype', default="swiss", type=click.Choice(["swiss", "genbank", "embl"]),\
     help='The type of reference file. Default is swiss.')
@@ -108,21 +109,16 @@ def miner_main(referencefile, referencetype, filtermode, config, stats,\
     """
     Filter amino acid sequences from a reference file.
     
-    Args:
-        referencefile (str): Path to the reference file containing sequences.
-        referencetype (str): Type of the reference file (e.g., fasta, fastq).
-        filtermode (str): Mode of filtering to be applied. Can be 'size', 'motif', or 'loc'.
-        config (str): Path to the configuration file in YAML format.
-        outmode (str): Mode for output generation.
-        outputfilename (str): Name of the output file.
-        outputfiletype (str): Type of the output file.
+    referencefile (str): Path to the reference file containing sequences.
+    referencetype (str): Type of the reference file (e.g., fasta, fastq).
+    filtermode (str): Mode of filtering. Can be 'size', 'motif', or 'loc'.
+    config (str): Path to the configuration file in YAML format.
+    outmode (str): Mode for output generation.
+    outputfilename (str): Name of the output file.
+    outputfiletype (str): Type of the output file.
     
-    Raises:
-        ValueError: If an invalid filter mode is provided.
-        SystemExit: If there is an invalid configuration for the specified filter mode.
-    
-    Returns:
-        None
+    ValueError: If an invalid filter mode is provided.
+    SystemExit: If there is an invalid configuration for the specified filter mode.
     """
     
     try:
@@ -143,7 +139,7 @@ def seq_filter(referencefile, referencetype, filtermode, config, stats,\
     Args:
         referencefile (str): Path to the reference file containing sequences.
         referencetype (str): Type of the reference file (e.g., fasta, fastq).
-        filtermode (str): Mode of filtering to be applied. Can be 'size', 'motif', or 'loc'.
+        filtermode (str): Mode of filtering. Can be 'size', 'motif', or 'loc'.
         config (str): Path to the configuration file in YAML format.
         outmode (str): Mode for output generation.
         outputfilename (str): Name of the output file.
@@ -154,7 +150,8 @@ def seq_filter(referencefile, referencetype, filtermode, config, stats,\
         SystemExit: If there is an invalid configuration for the specified filter mode.
     
     Returns:
-        None
+        list[filterOutput]: A list of filterOutput objects containing the filtered sequences.
+
     """
     
     # configure the module

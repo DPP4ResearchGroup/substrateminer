@@ -1,3 +1,4 @@
+import click
 import argparse
 import numpy as np
 import matplotlib as mpl
@@ -6,7 +7,8 @@ import os
 import sys
 import csv
 import subprocess
-import consensus_funcs as modules
+
+from consensus import consensus_funcs as modules
 
 def consensus(inputfile: str, outputfile: str, outputdir: str, consensus_option: int, threshold: float, save_figures):
     """
@@ -267,11 +269,10 @@ def weblogo(inputfile: str, outputfile: str, resolution: int, filetype: str):
     except Exception as e:
         print(f'Error occurred while running weblogo: {e}')
     
-
-if __name__ == '__main__':
-        
+def consensus_main():  
     parser = argparse.ArgumentParser(description='Determine consensus sequence from a multiple sequence alignment (MSA) and draw summative plots.')
-    subparsers = parser.add_subparsers(dest='command', help='sub-command help')
+    subparsers = parser.add_subparsers()
+    # subparsers = parser.add_subparsers(dest='command', help='sub-command help')
     subparsers.required = True
 
     # Create the parser for subcommand 'consensus'
@@ -308,3 +309,55 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         parser.print_help()
         sys.exit(1)
+
+@click.command('motif', context_settings=dict(ignore_unknown_options=True))
+@click.argument('args', nargs=-1, type=click.UNPROCESSED)
+def consensus_switch(args):
+    """
+    Interface for consensus sequence determination.
+    """
+    #print("%%%%%%%%%%%%%%%%%%%%%%%  DEBUG  %%%%%%%%%%%%%%%%%%%%%%%")
+    #print("args")
+    #print(sys.argv[3:])
+    #print([item for item in sys.argv[1:]])
+    #print(any(item in ['-h', '--help'] for item in sys.argv[2:]))
+    #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    
+    #subcommand = ''.join(map(str, sys.argv[1:]))
+    # if subcommand == 'motif' or\
+    #     any(item in ['-h', '--help'] for item in sys.argv[2:]):
+        
+        # debug block
+        #print("%%%%%%%%%%%%%%%%%%%%%%%  DEBUG  %%%%%%%%%%%%%%%%%%%%%%%")
+        #print("click pathway")
+        #print(sys.argv[1:])
+        #print([item for item in sys.argv[1:]])
+        #print(sys.argv[2:])
+        #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    
+    consensus_click(sys.argv[2:])
+        
+
+def consensus_click(args):
+    """
+    Interface for consensus sequence determination.
+    """
+    # Forward the Click args to the argparse utility
+    if not any(args):
+        sys.argv = ['consensus.py', '-h']
+        
+    sys.argv = ['consensus.py'] + list(args)  # Simulate the command-line arguments for argparse
+    consensus_main()
+
+
+if __name__ == '__main__':
+    if sys.argv[1:] and not any(item in ['-h', '--help'] for item in sys.argv[1:]):
+        # debug block
+        print("%%%%%%%%%%%%%%%%%%%%%%%  DEBUG  %%%%%%%%%%%%%%%%%%%%%%%")
+        print("click pathway")
+        #print(sys.argv[1:])
+        #print([item for item in sys.argv[1:]])
+        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+        consensus_click(sys.argv[1:])
+    else:
+        consensus_main()
