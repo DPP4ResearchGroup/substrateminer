@@ -151,6 +151,7 @@ def seq_filter(referencefile, referencetype, filtermode, config, stats,\
     
     Returns:
         list[filterOutput]: A list of filterOutput objects containing the filtered sequences.
+
     """
     
     # configure the module
