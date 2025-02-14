@@ -1,0 +1,53 @@
+name: substrateminer releasing
+
+on:
+  push:
+    branches: [main, develop, features]
+  pull_request:
+    branches: [main, develop, releases]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'  # Change as needed
+      
+      - name: Install Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+      
+      - name: Cache conda environment
+        uses: actions/cache@v3
+        with:
+          path: ~/conda_env
+          key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-
+
+      - name: Create or update conda environment
+        run: |
+          if [ ! -d "~/conda_env" ] || ! cmp -s environment.yml ~/conda_env/environment.yml; then
+            conda env create -f environment.yml --prefix ~/conda_env
+          else
+            conda env update -f environment.yml --prefix ~/conda_env --prune
+          fi
+
+      - name: Activate conda environment for CI run
+        run: echo "conda activate ~/conda_env" >> $GITHUB_ENV
+
+      - name: Run tests with unittest
+        run: |
+          python -m unittest discover -s unittests -p "test_*.py"
+      
+      - name: Run CLI tests with pip
+        run: |
+          pip install -e .
+          substrateminer --help
