@@ -10,7 +10,7 @@ dependencies:
   - pandas
   - matplotlib
   - biopython>=1.84
-  - mafft
+  - mafft>=5.1
   - clustalo
   - weblogo
   - pip

@@ -36,11 +36,13 @@ jobs:
       - name: Cache conda environment
         uses: actions/cache@v3
         with:
-          path: ~/conda_env
+          path: |
+            /home/runner/conda_pkgs_dir
+            /Users/runner/conda_pkgs_dir
           key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
           restore-keys: |
-            ${{ runner.os }}-conda-
-      
+              ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
+
       - name: Run CLI tests with pip
         run: |
           pip install -e .
