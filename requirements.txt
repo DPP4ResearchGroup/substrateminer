@@ -1,4 +1,4 @@
-biopython==1.78
+biopython>=1.84
 certifi==2024.8.30
 charset-normalizer==3.3.2
 click==8.1.7

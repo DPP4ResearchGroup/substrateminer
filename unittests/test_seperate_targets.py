@@ -8,10 +8,10 @@
 import yaml
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from  miner import miner
-# from miner.miner import seq_filter
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
+
+from substrate_miner.miner import miner
 
 import unittest
 from io import StringIO
@@ -21,10 +21,10 @@ from unittest.mock import patch
 class TestSeparateTargets(unittest.TestCase):
     
     # Example test case with valid input
-    referencefile = "tests/data/test-uniprot.txt"
+    referencefile = os.path.abspath(os.path.join(os.path.dirname(__file__), '../tests/data/test-uniprot.txt'))
     referencetype = "swiss"
     filtermode = "size"
-    config = "unittests/test-config.yml"
+    config = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test-config.yml'))
     outmode = "inline"
     outputfilename = "unitest-out"
     outputfiletype = 'fasta'
@@ -34,10 +34,9 @@ class TestSeparateTargets(unittest.TestCase):
         test_config = yaml.safe_load(file)
     
     def test_separate_target_size_valid_input(self):
-        
         # example of a valid input
-        out_stack = miner.seq_filter(self.referencefile, self.referencetype, self.filtermode, self.config, self.stats, self.outmode, self.outputfilename, self.outputfiletype)
-
+        out_stack = miner.seq_filter(self.referencefile, self.referencetype, self.filtermode, self.config,\
+            self.stats, self.outmode, self.outputfilename, self.outputfiletype)
         result_seqs = []
         
         for record in out_stack[0].target:
