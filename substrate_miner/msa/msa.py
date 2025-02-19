@@ -1,16 +1,19 @@
 from Bio import SeqIO
 from Bio.Align.Applications import ClustalOmegaCommandline
 from Bio.Align.Applications import MafftCommandline
+from Bio.Align.Applications import MuscleCommandline
+
 import argparse
 from Bio import SeqIO
 
 import click
 import sys
+import shutil
 
 
 def perform_msa(input_file, output_file, method):
     """
-    Perform multiple sequence alignment using ClustalOmega or MAFFT.
+    Perform multiple sequence alignment using ClustalOmega, MAFFT and MUSCLE.
 
     Parameters:
     - input_file (str): Path to the input file containing sequences in FASTA format.
@@ -42,6 +45,12 @@ def perform_msa(input_file, output_file, method):
         elif method == "mafft":
             mafft_cline = MafftCommandline(input=input_file)
             stdout, stderr = mafft_cline()
+        elif method == "muscle":
+            muscle_exe = shutil.which("muscle")
+            if muscle_exe is None:
+                raise FileNotFoundError("MUSCLE executable not found. Please ensure it is installed and in your PATH.")
+            muscle_cline = MuscleCommandline(muscle_exe, input=input_file, out=output_file)
+            stdout, stderr = muscle_cline()
         else:
             raise ValueError("Invalid alignment method specified")
 
@@ -86,7 +95,7 @@ def msa_main():
     parser = argparse.ArgumentParser(description="Perform multiple sequence alignment")
     parser.add_argument("-i", "--input", help="Input file path", required=True)
     parser.add_argument("-o", "--output", help="Output file path", required=True)
-    parser.add_argument("-m", "--method", help="Alignment method (clustalomega, mafft)", required=True)
+    parser.add_argument("-m", "--method", help="Alignment method (clustalomega, mafft, muscle)", required=True)
     args = parser.parse_args()
 
     # Perform multiple sequence alignment
