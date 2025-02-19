@@ -8,8 +8,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest", "macos-latest"]
+  
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,8 +26,13 @@ jobs:
       - name: Install Miniconda
         uses: conda-incubator/setup-miniconda@v2
         with:
-          auto-update-conda: true
-      
+          miniconda-version: 'latest'
+          channel-priority: true
+          auto-update-conda: false
+          auto-activate-base: false
+          environment-file: environment.yml
+          activate-environment: substrate-miner
+
       - name: Cache conda environment
         uses: actions/cache@v3
         with:
@@ -31,23 +40,12 @@ jobs:
           key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
           restore-keys: |
             ${{ runner.os }}-conda-
-
-      - name: Create or update conda environment
-        run: |
-          if [ ! -d "~/conda_env" ] || ! cmp -s environment.yml ~/conda_env/environment.yml; then
-            conda env create -f environment.yml --prefix ~/conda_env
-          else
-            conda env update -f environment.yml --prefix ~/conda_env --prune
-          fi
-
-      - name: Activate conda environment for CI run
-        run: echo "conda activate ~/conda_env" >> $GITHUB_ENV
-
-      - name: Run tests with unittest
-        run: |
-          python -m unittest discover -s unittests -p "test_*.py"
       
       - name: Run CLI tests with pip
         run: |
           pip install -e .
           substrateminer --help
+
+      - name: Run tests with unittest
+        run: |
+          python -m unittest discover -s unittests -p "test_*.py"

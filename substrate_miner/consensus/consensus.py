@@ -8,7 +8,7 @@ import sys
 import csv
 import subprocess
 
-from consensus import consensus_funcs as modules
+from substrate_miner.consensus import consensus_funcs as modules
 
 def consensus(inputfile: str, outputfile: str, outputdir: str, consensus_option: int, threshold: float, save_figures):
     """

@@ -7,10 +7,9 @@
 
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from records.record_class import swissRecord, swissRecord2
-from records.record2seq import record2seq
+from substrate_miner.records.record_class import swissRecord, swissRecord2
+from substrate_miner.records.record2seq import record2seq
 
 from Bio import SeqIO
 

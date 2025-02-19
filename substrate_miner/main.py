@@ -4,10 +4,10 @@
 
 import click
 
-import consensus.consensus as consensus
-import msa.msa as msa
-import miner.miner as miner
-import pathfinder.pathfinder as pathfinder
+import substrate_miner.consensus.consensus as consensus
+import substrate_miner.msa.msa as msa
+import substrate_miner.miner.miner as miner
+import substrate_miner.pathfinder.pathfinder as pathfinder
 
 @click.group()
 def substrateminer():
@@ -23,6 +23,6 @@ substrateminer.add_command(msa.msa_switch)
 substrateminer.add_command(consensus.consensus_switch)
 substrateminer.add_command(pathfinder.pathfinder_main)
 
-
 if __name__ == '__main__':
     substrateminer()
+    
