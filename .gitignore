@@ -167,3 +167,7 @@ outputs/
 consensus/Outputs/
 paper/jats/
 paper/*.pdf
+unittests/outputs/
+unittests/*_output.*
+*_output.*
+

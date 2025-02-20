@@ -21,7 +21,7 @@ from unittest.mock import patch
 class TestSeparateTargets(unittest.TestCase):
     
     # Example test case with valid input
-    referencefile = os.path.abspath(os.path.join(os.path.dirname(__file__), '../tests/data/test-uniprot.txt'))
+    referencefile = os.path.join('unittests/data/test-uniprot.txt')
     referencetype = "swiss"
     filtermode = "size"
     config = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test-config.yml'))

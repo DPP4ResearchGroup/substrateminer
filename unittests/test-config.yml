@@ -17,4 +17,4 @@ ops:
 
 tests:
   - name: 'test_target_loc_cli'
-    expect_results: 'unittests/expected_test_target_loc_cli.yml'
+    expect_results: 'unittests/results/expected_test_target_loc_cli.yml'
