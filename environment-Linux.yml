@@ -14,22 +14,20 @@ dependencies:
   - muscle<=3.9
   - clustalo
   - weblogo
+  - yaml
+  - click
   - pip
   - pip:
       - requests
       - click
-      - pyyaml
+      - PyYAML
       - certifi
       - fonttools
       - pillow
 
   # Platform-specific dependencies
-  - blas=*=mkl  # Ensures MKL-based performance for NumPy/Scipy where possible
+  - blas=*=openblas  # Ensures OpenBLAS-based performance for NumPy/Scipy where possible
   - pip:
       - six  # Ensures compatibility across Python 2/3
   - pip:
       - urllib3  # Avoids missing SSL-related packages
-
-# OS-Specific Handling
-#  - m2w64-toolchain  # [win] Windows compilers
-#  - openmp  # [osx] macOS needs OpenMP separately

@@ -38,6 +38,10 @@ def perform_msa(input_file, output_file, method):
         # Read input sequences from a file
         sequences = SeqIO.parse(input_file, "fasta")
 
+        # Check if the output file exists and remove it if it does
+        if os.path.exists(output_file):
+            os.remove(output_file)
+
         # Perform multiple sequence alignment using the specified method
         if method == "clustalomega":
             clustalomega_cline = ClustalOmegaCommandline(infile=input_file, outfile=output_file, verbose=True, auto=True)

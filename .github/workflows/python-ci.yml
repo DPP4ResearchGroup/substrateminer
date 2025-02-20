@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-latest", "macos-latest"]
+        os: ["ubuntu-latest"] #, "macos-latest"
   
     steps:
       - name: Checkout repository
@@ -30,8 +30,11 @@ jobs:
           channel-priority: true
           auto-update-conda: false
           auto-activate-base: false
-          environment-file: environment.yml
+          environment-file: environment-${{ runner.os }}.yml
           activate-environment: substrate-miner
+
+      - name: Set environment variable for hash
+        run: echo "ENV_FILE=environment-${{ runner.os }}.yml" >> $GITHUB_ENV
 
       - name: Cache conda environment
         uses: actions/cache@v3
@@ -39,9 +42,9 @@ jobs:
           path: |
             /home/runner/conda_pkgs_dir
             /Users/runner/conda_pkgs_dir
-          key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
+          key: ${{ runner.os }}-conda-${{ hashFiles(env.ENV_FILE) }}
           restore-keys: |
-              ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
+              ${{ runner.os }}-conda-${{ hashFiles(env.ENV_FILE) }}
 
       - name: Run CLI tests with pip
         run: |
@@ -50,4 +53,4 @@ jobs:
 
       - name: Run tests with unittest
         run: |
-          python -m unittest discover -s unittests -p "test_*.py"
+          conda run -n substrate-miner python -m unittest discover -s unittests -p "test_*.py"
