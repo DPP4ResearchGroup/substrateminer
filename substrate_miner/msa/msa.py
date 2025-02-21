@@ -1,16 +1,16 @@
 from Bio import SeqIO
-from Bio.Align.Applications import ClustalOmegaCommandline
-from Bio.Align.Applications import MafftCommandline
-import argparse
-from Bio import SeqIO
+from Bio.Align.Applications import ClustalOmegaCommandline, MafftCommandline, MuscleCommandline
 
+import argparse
 import click
 import sys
+import shutil
+import os
 
 
 def perform_msa(input_file, output_file, method):
     """
-    Perform multiple sequence alignment using ClustalOmega or MAFFT.
+    Perform multiple sequence alignment using ClustalOmega, MAFFT and MUSCLE.
 
     Parameters:
     - input_file (str): Path to the input file containing sequences in FASTA format.
@@ -24,7 +24,9 @@ def perform_msa(input_file, output_file, method):
     - None
 
     Other Bio.Align.Applications options:
-    - EmbossCommandline: This class provides a command line wrapper for the EMBOSS suite of sequence analysis tools. It can be used to perform multiple sequence alignment using EMBOSS tools like "needle" or "water".
+    - EmbossCommandline: This class provides a command line wrapper for the EMBOSS suite of
+        sequence analysis tools. It can be used to perform multiple sequence alignment using
+        EMBOSS tools like "needle" or "water".
 
     Note:
     - The input file should contain sequences in FASTA format.
@@ -35,13 +37,32 @@ def perform_msa(input_file, output_file, method):
         # Read input sequences from a file
         sequences = SeqIO.parse(input_file, "fasta")
 
+        # Check if the output file exists and remove it if it does
+        if os.path.exists(output_file):
+            os.remove(output_file)
+
         # Perform multiple sequence alignment using the specified method
         if method == "clustalomega":
-            clustalomega_cline = ClustalOmegaCommandline(infile=input_file, outfile=output_file, verbose=True, auto=True)
+            clustalomega_cline = ClustalOmegaCommandline(infile=input_file,\
+                outfile=output_file, verbose=True, auto=True)
             stdout, stderr = clustalomega_cline()
         elif method == "mafft":
-            mafft_cline = MafftCommandline(input=input_file)
+            mafft_exe = shutil.which("mafft")
+            if mafft_exe is None:
+                raise FileNotFoundError("MAFFT executable not found.\
+                    Please ensure it is installed and in your PATH.")
+            mafft_cline = MafftCommandline(mafft_exe, input=input_file)
             stdout, stderr = mafft_cline()
+            with open(output_file, "w") as mafft_w_handle:
+                mafft_w_handle.write(stdout)
+        elif method == "muscle":
+            muscle_exe = shutil.which("muscle")
+            if muscle_exe is None:
+                raise FileNotFoundError("MUSCLE executable not found.\
+                    Please ensure it is installed and in your PATH.")
+            muscle_cline = MuscleCommandline(muscle_exe, input=input_file,\
+                out=output_file)
+            stdout, stderr = muscle_cline()
         else:
             raise ValueError("Invalid alignment method specified")
 
@@ -86,7 +107,7 @@ def msa_main():
     parser = argparse.ArgumentParser(description="Perform multiple sequence alignment")
     parser.add_argument("-i", "--input", help="Input file path", required=True)
     parser.add_argument("-o", "--output", help="Output file path", required=True)
-    parser.add_argument("-m", "--method", help="Alignment method (clustalomega, mafft)", required=True)
+    parser.add_argument("-m", "--method", help="Alignment method (clustalomega, mafft, muscle)", required=True)
     args = parser.parse_args()
 
     # Perform multiple sequence alignment

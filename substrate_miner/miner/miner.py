@@ -13,10 +13,9 @@ import yaml
 import sys
 import os
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from miner import miner_funcs as modulePepProcess
-from records.record_class import motifFeatures, filterOutput
+from substrate_miner.miner import miner_funcs as modulePepProcess
+from substrate_miner.records.record_class import motifFeatures, filterOutput
 
 from Bio import SwissProt
 from Bio import SeqIO
