@@ -1,11 +1,7 @@
 from Bio import SeqIO
-from Bio.Align.Applications import ClustalOmegaCommandline
-from Bio.Align.Applications import MafftCommandline
-from Bio.Align.Applications import MuscleCommandline
+from Bio.Align.Applications import ClustalOmegaCommandline, MafftCommandline, MuscleCommandline
 
 import argparse
-from Bio import SeqIO
-
 import click
 import sys
 import shutil
@@ -51,14 +47,19 @@ def perform_msa(input_file, output_file, method):
                 outfile=output_file, verbose=True, auto=True)
             stdout, stderr = clustalomega_cline()
         elif method == "mafft":
-            mafft_cline = MafftCommandline(input=input_file)
+            mafft_exe = shutil.which("mafft")
+            if mafft_exe is None:
+                raise FileNotFoundError("MAFFT executable not found.\
+                    Please ensure it is installed and in your PATH.")
+            mafft_cline = MafftCommandline(mafft_exe, input=input_file)
             stdout, stderr = mafft_cline()
             with open(output_file, "w") as mafft_w_handle:
                 mafft_w_handle.write(stdout)
         elif method == "muscle":
             muscle_exe = shutil.which("muscle")
             if muscle_exe is None:
-                raise FileNotFoundError("MUSCLE executable not found. Please ensure it is installed and in your PATH.")
+                raise FileNotFoundError("MUSCLE executable not found.\
+                    Please ensure it is installed and in your PATH.")
             muscle_cline = MuscleCommandline(muscle_exe, input=input_file,\
                 out=output_file)
             stdout, stderr = muscle_cline()

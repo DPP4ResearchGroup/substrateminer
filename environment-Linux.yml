@@ -16,18 +16,15 @@ dependencies:
   - weblogo
   - yaml
   - click
-  - pip
   - pip:
       - requests
       - click
-      - PyYAML
+      - pyyaml
       - certifi
       - fonttools
       - pillow
+      - six
+      - urllib3
 
   # Platform-specific dependencies
   - blas=*=openblas  # Ensures OpenBLAS-based performance for NumPy/Scipy where possible
-  - pip:
-      - six  # Ensures compatibility across Python 2/3
-  - pip:
-      - urllib3  # Avoids missing SSL-related packages

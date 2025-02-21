@@ -67,7 +67,7 @@ class TestMSA(unittest.TestCase):
     def test_perform_msa_output_comparison(self):
         msa.perform_msa(os.path.abspath('unittests/data/msa.fasta'),\
             os.path.abspath('unittests/msa_output.aln'), 'mafft')
-        with open('unittests/msa_output.aln', 'r') as output_file:
+        with open(os.path.abspath('unittests/msa_output.aln'), 'r') as output_file:
             output_content = output_file.read()
         with open('unittests/results/msa_mafft.aln', 'r') as expected_file:
             expected_content = expected_file.read()

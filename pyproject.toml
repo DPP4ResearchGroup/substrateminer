@@ -24,7 +24,7 @@ dependencies = [
     "weblogo",
     "requests",
     "click",
-    "pyyaml",
+    "PyYAML",
     "certifi",
     "fonttools",
     "pillow"

@@ -12,9 +12,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-latest"] #, "macos-latest"
+        include:
+          - os: ubuntu-latest
+            label: linux-64
+            ENV_FILE: environment-Linux.yml
+            prefix: /home/runner/conda_pkgs_dir
+            pip_path: /home/runner/.cache/pip
+            defaults:
+              run:
+                shell: bash -el {0}
+#          - os: macos-latest
+#            label: osx-64
+#            ENV_FILE: environment-macOS.yml
+#            prefix: /Users/runner/conda_pkgs_dir
+#            pip_path: /Library/Caches/pip
+#            defaults:
+#              run:
+#                shell: bash -el {0}
   
-    steps:
+    steps:      
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -22,35 +38,34 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'  # Change as needed
-      
-      - name: Install Miniconda
-        uses: conda-incubator/setup-miniconda@v2
+
+      - name: Cache conda environment
+        id: cache-conda
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ runner.tool_cache }}
+            ${{ matrix.prefix }}
+            ${{ matrix.pip_path }}
+          key: ${{ runner.os }}-conda-${{ hashFiles(matrix.ENV_FILE) }}
+          restore-keys: |
+            ${{ runner.os }}-conda-
+
+      - name: Create conda environment
+        uses: conda-incubator/setup-miniconda@v3
         with:
           miniconda-version: 'latest'
           channel-priority: true
           auto-update-conda: false
           auto-activate-base: false
-          environment-file: environment-${{ runner.os }}.yml
+          environment-file: ${{ matrix.ENV_FILE }}
           activate-environment: substrate-miner
 
-      - name: Set environment variable for hash
-        run: echo "ENV_FILE=environment-${{ runner.os }}.yml" >> $GITHUB_ENV
-
-      - name: Cache conda environment
-        uses: actions/cache@v3
-        with:
-          path: |
-            /home/runner/conda_pkgs_dir
-            /Users/runner/conda_pkgs_dir
-          key: ${{ runner.os }}-conda-${{ hashFiles(env.ENV_FILE) }}
-          restore-keys: |
-              ${{ runner.os }}-conda-${{ hashFiles(env.ENV_FILE) }}
-
-      - name: Run CLI tests with pip
+      
+      - name: Install package & run tests
         run: |
+          conda env export
           pip install -e .
           substrateminer --help
-
-      - name: Run tests with unittest
-        run: |
-          conda run -n substrate-miner python -m unittest discover -s unittests -p "test_*.py"
+          conda run -n substrate-miner python -m unittest\
+            discover -s unittests -p "test_*.py"
