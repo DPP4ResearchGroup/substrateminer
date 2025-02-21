@@ -2,9 +2,10 @@
 A python package to discover enzyme substrates based on known sequence consensus.
 
 ## CI/CD Status
-|Branch|`pd`|`develop`|
+|Branch|`pd`|`develop`|`features`|
 |---|---|---|
-|Status|||
+|Status|
+[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|
 
 ## TL;DR
 
