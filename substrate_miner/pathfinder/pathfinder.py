@@ -143,21 +143,21 @@ def workflow_biokegg(uniprots, orgs, output) -> None:
         #print(pathways)
         #print(diseases)
         #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-        
+
         # stats block
         print("++++++++++++++++++++++++++++++++++++++++++++")
         print(f"UniProt ID: {uniprot}, total pathways: {len(pathways)}, total diseases: {len(diseases)}")
         print("++++++++++++++++++++++++++++++++++++++++++++")   
-        
+
         # Write output to file or print to console
         if output != None:
             write_output_table(output, uniprot, pathways, diseases)
         else:
             ## Implement output to console
             click.echo(f"{uniprot}\t{'; '.join(pathways)}\t{'; '.join(diseases)}")
-        
+
         index_counter += 1
-        
+
 def workflow_api(uniports, output) -> None:
     """
     Workflow for the API mode.
@@ -169,32 +169,42 @@ def workflow_api(uniports, output) -> None:
     Returns:
         None
     """
-    
+
     uniprot_ids = uniports
-    
+
     for uniprot in uniprot_ids:
         # Initialize pathways and diseases
         pathways = []
         diseases = []
-        
-        # Retrieve pathways and diseases for each UniProt ID        
+
+        # Retrieve pathways and diseases for each UniProt ID
         pathway = get_kegg_pathways_api(uniprot)
-        pathways.extend(pathway)
+        if "Error" in pathway:
+            click.echo(f"No pathways found for UniProt ID: {uniprot}")
+
         disease = get_kegg_diseases_api(uniprot)
+        if "Error" in disease:
+            click.echo(f"No diseases found for UniProt ID: {uniprot}")
+
+        if "Error" in pathway and "Error" in disease:
+            continue
+
+        pathways.extend(pathway)
         diseases.extend(disease)
-        
+
         # stats block
         print("++++++++++++++++++++++++++++++++++++++++++++")
-        print(f"UniProt ID: {uniprot}, total pathways: {len(pathways)}, total diseases: {len(diseases)}")
-        print("++++++++++++++++++++++++++++++++++++++++++++")   
-        
+        print(f"UniProt ID: {uniprot}, total pathways: {len(pathways)}, "
+              f"total diseases: {len(diseases)}")
+        print("++++++++++++++++++++++++++++++++++++++++++++")
+
         # Write output to file or print to console
-        if output != None:
+        if output is not None:
             write_output_table(output, uniprot, pathways, diseases)
         else:
             ## Implement output to console
             click.echo(f"{uniprot}\t{'; '.join(pathways)}\t{'; '.join(diseases)}")
-    
+
 def write_output_table(output, uniprot, pathways, diseases):
     """
     Write the output to a file in a tabulated format.

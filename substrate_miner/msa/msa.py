@@ -32,7 +32,7 @@ def perform_msa(input_file, output_file, method):
     - The input file should contain sequences in FASTA format.
     - The alignment results will be printed to the console and saved to the output file.
     """
-    
+
     try:
         # Read input sequences from a file
         sequences = SeqIO.parse(input_file, "fasta")
@@ -85,7 +85,7 @@ def msa_switch(args):
     """
     Interface for multi-sequence alignments
     """
-    
+
     msa_click(sys.argv[2:])
 
 def msa_click(args):
@@ -94,14 +94,14 @@ def msa_click(args):
     #print("click pathway")
     #print(args)
     #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-    
+
     if not any(args):
         sys.argv = ['msa.py', '-h']
-        
+
     sys.argv = ['msa.py'] + list(args)
     # Perform multiple sequence alignment
     msa_main()
-    
+
 def msa_main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="Perform multiple sequence alignment")
@@ -121,7 +121,7 @@ if __name__ == "__main__":
         #print(sys.argv[1:])
         #print([item for item in sys.argv[1:]])
         print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-        
+
         msa_click(sys.argv[1:])
     else:
         msa_main()

@@ -1,0 +1,5 @@
+
+theme: jekyll-theme-minimal
+title: SubstrateMiner
+description: A tool for mining substrate sequences from protein structures.
+show_downloads: true
