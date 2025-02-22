@@ -1,4 +1,4 @@
-name: Build Jekyll site - Custom
+name: Build Jekyll site
 on:
  push:
    branches: ["features"]
