@@ -1,3 +1,10 @@
+##################################################
+#            Test Description                    #
+##################################################
+# This file contains the unit tests for the      #
+# MSA CLI response.                              #
+##################################################
+
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
