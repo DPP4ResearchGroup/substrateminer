@@ -10,7 +10,8 @@ import subprocess
 
 from substrate_miner.consensus import consensus_funcs as modules
 
-def consensus(inputfile: str, outputfile: str, outputdir: str, consensus_option: int, threshold: float, save_figures):
+def consensus(inputfile: str, outputfile: str, outputdir: str,\
+    consensus_option: int, threshold: float, save_figures):
     """
     Determines the consensus sequence from a multiple sequence alignment (MSA) file.
     Args:
@@ -280,7 +281,7 @@ def consensus_main():
     parser_consensus.add_argument('-i', required=True, metavar = 'Input alignment file in FASTA format.', help='Filename for FASTA alignment')
     parser_consensus.add_argument('-o', metavar = 'Output gap stripped FASTA file name', help='Output FASTA filename. If not given will use name of input FASTA file as template to name output files.')
     parser_consensus.add_argument('-O', metavar = 'Output directory', help='Output directory for all output files. If not given will use directory of input FASTA file.')
-    parser_consensus.add_argument('-c', default='0', metavar = 'Method for removing insertions',\
+    parser_consensus.add_argument('-c', default='1', metavar = 'Method for removing insertions',\
         help='Desired method for removing insertions.\
                 1 = Positions with gap frequencies < threshold (0.5 default, change with -t flag).\
                 2 =  Positions with residue as most frequent character.\
