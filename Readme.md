@@ -124,6 +124,11 @@ $ conda env create -f environment-Linux.yml # Linux supoort
 $ conda env create -f environment-MacOS.yml # MacOS support
 ```
 
+## Design Workflow
+`substrateminer` is designed to provide a suite of tools to investigate enzyme substrate repertorie based on sequence cleavage consensus. The package is modular and extensible, following demonstrates a typical workflow:
+
+![Design Workflow](png/workflow.png)
+
 
 ## Methods and Functions
 ### Multiple Sequence Alignment (MSA)
