@@ -3,10 +3,23 @@
 `substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
 
 ## CI/CD Status
+<<<<<<< HEAD
 |Branch|`main`|`develop`|`features`|
 |---|---|---|
 |Status|
 [![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|
+=======
+### UnitTest Status
+| Branch | `pd` | `develop` | `features` |
+|:--------|:--------|:--------|:--------|
+|Linux|![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
+|macOS| [![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) |
+
+### GitHub Pages Status
+| Page | Status |
+|:--------|:--------|
+|substrateminer|[![pages-build-deployment](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment)
+>>>>>>> a2e63c9 (fix #36 - doc prerelease cr)
 
 ## TL;DR
 `substrateminer` provides three main categories of functionalities namely `motif`, `miner`, and `pathfinder`, `substrateminer` also integrates multi-sequence alignment tools to facilitate the analysis.
@@ -63,6 +76,21 @@ Dependencies
 
 
 ## Methods and Functions
+### Multiple Sequence Alignment (MSA)
+```
+usage: msa.py [-h] -i INPUT -o OUTPUT -m METHOD
+
+Perform multiple sequence alignment
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        Input file path
+  -o OUTPUT, --output OUTPUT
+                        Output file path
+  -m METHOD, --method METHOD
+                        Alignment method (clustalomega, mafft, muscle)
+```
 
 ### Consensus
 
