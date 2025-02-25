@@ -1,4 +1,4 @@
-name: substrateminer Linux releasing
+name: substrateminer releasing - MacOS
 
 on:
   push:
@@ -13,22 +13,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            label: linux-64
-            ENV_FILE: environment-Linux.yml
-            prefix: /home/runner/conda_pkgs_dir
-            pip_path: /home/runner/.cache/pip
+          - os: macos-latest
+            label: osx-64
+            ENV_FILE: environment-macOS.yml
+            prefix: /Users/runner/conda_pkgs_dir
+            pip_path: /Library/Caches/pip
             defaults:
               run:
                 shell: bash -el {0}
-#          - os: macos-latest
-#            label: osx-64
-#            ENV_FILE: environment-macOS.yml
-#            prefix: /Users/runner/conda_pkgs_dir
-#            pip_path: /Library/Caches/pip
-#            defaults:
-#              run:
-#                shell: bash -el {0}
   
     steps:      
       - name: Checkout repository

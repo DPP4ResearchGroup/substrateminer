@@ -1,7 +1,7 @@
-name: Build Jekyll site
+name: Build Jekyll site - Custom
 on:
  push:
-   branches: ["develop", "main"]
+   branches: ["features"]
 permissions:
   contents: read
   pages: write
