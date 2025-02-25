@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SubstrateMiner Documentation
 
 Welcome to the SubstrateMiner documentation. This page provides an overview of the tool, installation instructions, usage examples, and more.
@@ -87,3 +88,11 @@ Create a configuration file for GitHub Pages.
 title: SubstrateMiner Documentation
 description: Documentation for the SubstrateMiner tool
 theme: jekyll-theme-cayman
+=======
+# This file is used to configure the Jekyll site.
+
+theme: jekyll-theme-minimal
+title: SubstrateMiner
+description: A tool for mining substrate sequences from protein structures.
+show_downloads: true
+>>>>>>> 099ae590628b4c76e884be8545c903c0abd6580d

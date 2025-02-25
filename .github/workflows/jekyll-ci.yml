@@ -1,4 +1,4 @@
-name: Build Jekyll site
+name: Build Jekyll site - Custom
 on:
  push:
    branches: ["features"]
@@ -16,6 +16,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Build
         uses: actions/jekyll-build-pages@v1
+        with:
+          source: docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
   deploy:
