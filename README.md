@@ -1,10 +1,12 @@
+![Header Image](docs/assets/png/logo-2.jpg)
+
 # substrateminer
 `substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
 `substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
 
 ## CI/CD Status
 ### UnitTest Status
-| Branch | `pd` | `develop` | `features` |
+| Branch | `main` | `develop` | `features` |
 |:--------|:--------|:--------|:--------|
 |Linux|![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
 |macOS| [![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) |
@@ -69,6 +71,7 @@ $ substrateminer miner --referencefile unittests/data/test-uniprot.txt --config 
 #### Pathfinder
 To identify the molecular path for a substrate, the `pathfinder` subcommand can be used.
 ```
+$ substrateminer pathfinder -i unittests/data/uniprot_id_short.txt -o path.txt -a```
 ```
 
 ## Requirements
@@ -92,11 +95,18 @@ Optional binary dependencies for multiple sequence alignment:
 - MAFFT 7.475 or later
 
 ## Installation
-Due to complex dependency requirements of `substrateminer`, conda is recomand to here. 
+Due to complex dependency requirements of `substrateminer`, conda is recomand to here.
+
+`substrateminer` package provides both Linux and MacOS support, the following conda environment files can be used accordingly to install conda environment  `substrate-miner`:
 ```
+$ conda env create -f environment-Linux.yml # Linux supoort
+$ conda env create -f environment-MacOS.yml # MacOS support
 ```
 
 ## Methods and Functions
+All subcommands of `substrateminer` support CLI help function, function specific instructions can be accessed by adding the `-h` flag to the subcommand.
+
+
 ### Multiple Sequence Alignment (MSA)
 ```
 usage: msa.py [-h] -i INPUT -o OUTPUT -m METHOD
