@@ -2,22 +2,12 @@
 
 # substrateminer
 `substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
-`substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
 
 ## CI/CD Status
-<<<<<<< HEAD
-<<<<<<< HEAD
-|Branch|`main`|`develop`|`features`|
-|---|---|---|
-|Status|
-[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|[![substrateminer releasing](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml)|
-=======
+
 ### UnitTest Status
-| Branch | `pd` | `develop` | `features` |
-=======
-### UnitTest Status
+
 | Branch | `main` | `develop` | `features` |
->>>>>>> 099ae590628b4c76e884be8545c903c0abd6580d
 |:--------|:--------|:--------|:--------|
 |Linux|![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
 |macOS| [![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) |
@@ -26,10 +16,7 @@
 | Page | Status |
 |:--------|:--------|
 |substrateminer|[![pages-build-deployment](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment)
-<<<<<<< HEAD
->>>>>>> a2e63c9 (fix #36 - doc prerelease cr)
-=======
->>>>>>> 099ae590628b4c76e884be8545c903c0abd6580d
+
 
 ## TL;DR
 `substrateminer` provides three main categories of functionalities namely `motif`, `miner`, and `pathfinder`, `substrateminer` also integrates multi-sequence alignment tools to facilitate the analysis.
@@ -49,7 +36,7 @@ Commands:
   msa         Interface for multi-sequence alignments
   pathfinder  Find the pathological/molecular path for a substrate.
 ```
-<<<<<<< HEAD
+
 Examples:
 ### Motif
 Consensus can be derived from a collection of sequences using the `consensus` subcommand.
@@ -69,7 +56,6 @@ $ substrateminer msa -i input.fasta -o output.fasta
 $ substrateminer pathfinder -i input.fasta -o output.fasta
 ```
 
-=======
 ### Installation/Setup
 Download and setup conda environment befefore install `substrateminer` package with pip.
 ```
@@ -108,50 +94,12 @@ $ substrateminer miner --referencefile unittests/data/test-uniprot.txt --config 
 To identify the molecular path for a substrate, the `pathfinder` subcommand can be used.
 ```
 $ substrateminer pathfinder -i unittests/data/uniprot_id_short.txt -o path.txt -a```
->>>>>>> 099ae590628b4c76e884be8545c903c0abd6580d
 ```
 
 ## Requirements
 `substrateminer` requires the following dependencies:
 - Python 3.10.11 or later
 - BioPython 1.84 or later
-<<<<<<< HEAD
-
-Optional binary dependencies for multiple sequence alignment:
-- Clustal Omega 1.2.4 or later
-- MUSCLE 5.1 or later
-- MAFFT 7.475 or later
-
-## Installation
-Dependencies
-```
-
-
-## Methods and Functions
-### Multiple Sequence Alignment (MSA)
-```
-usage: msa.py [-h] -i INPUT -o OUTPUT -m METHOD
-
-Perform multiple sequence alignment
-
-options:
-  -h, --help            show this help message and exit
-  -i INPUT, --input INPUT
-                        Input file path
-  -o OUTPUT, --output OUTPUT
-                        Output file path
-  -m METHOD, --method METHOD
-                        Alignment method (clustalomega, mafft, muscle)
-```
-
-### Consensus
-
-## Contributing
-### Feedback
-Feedback is greatly appreciated. If you have any questions, comments, or concerns, please feel free to open an issue on the project's issue tracker.
-## License
-`substrateminer` is distributed under the MIT license.
-=======
 - Numpy
 - SciPy
 - Pandas
@@ -161,8 +109,6 @@ Feedback is greatly appreciated. If you have any questions, comments, or concern
 - click
 - PyYAML
 - pillow
-
-
 Optional binary dependencies for multiple sequence alignment:
 - Clustal Omega 1.2.4 or later
 - MUSCLE 5.1 or later
@@ -172,16 +118,16 @@ Optional binary dependencies for multiple sequence alignment:
 Due to complex dependency requirements of `substrateminer`, conda is recomand to here.
 
 `substrateminer` package provides both Linux and MacOS support, the following conda environment files can be used accordingly to install conda environment  `substrate-miner`:
+
 ```
 $ conda env create -f environment-Linux.yml # Linux supoort
 $ conda env create -f environment-MacOS.yml # MacOS support
 ```
 
+
 ## Methods and Functions
-All subcommands of `substrateminer` support CLI help function, function specific instructions can be accessed by adding the `-h` flag to the subcommand.
-
-
 ### Multiple Sequence Alignment (MSA)
+
 ```
 usage: msa.py [-h] -i INPUT -o OUTPUT -m METHOD
 
@@ -212,6 +158,7 @@ positional arguments:
 options:
   -h, --help           show this help message and exit
 ```
+
 #### Consensus
 ```
 usage: consensus.py consensus [-h] -i Input alignment file in FASTA format.
@@ -240,7 +187,9 @@ options:
                         (default: 0.5)
   -f                    Include flag to prevent saving images of MSA data analysis.
 ```
+
 #### Weblogo
+
 ```
 usage: consensus.py weblogo [-h] -i INPUTFILE -o FILENAME [-s RESOLUTION] [-F FILETYPE]
 
@@ -251,6 +200,7 @@ options:
   -s RESOLUTION  Resolution of the weblogo image.
   -F FILETYPE    File type of the output image.
 ```
+
 ### Miner
 ```
 Usage: substrateminer miner [OPTIONS]
@@ -278,6 +228,7 @@ Options:
 ```
 
 ### Pathfinder
+
 ```
 Usage: substrateminer pathfinder [OPTIONS]
 
@@ -293,6 +244,7 @@ Options:
   -g, --orgs TEXT      Organism code for the KEGG API (default: hsa)
   --help               Show this message and exit.
 ```
+
 ## GitHub Actions CI - UnitTests sequence
 
 CI/CD is carried out with GitHub Actions workflow and consists following steps:
@@ -309,4 +261,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Issue/Bug Reports and Contributions
 We welcome contributions to `substrateminer`. If you would like to contribute, please fork the repository and submit a pull request. For major changes, please [open an issue](https://github.com/manifestoso/substrateminer/issues) first to discuss what you would like to change.
->>>>>>> 099ae590628b4c76e884be8545c903c0abd6580d
