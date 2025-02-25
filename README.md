@@ -1,5 +1,6 @@
 # substrateminer
 `substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
+`substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
 
 ## CI/CD Status
 ### UnitTest Status
