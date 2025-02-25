@@ -7,7 +7,7 @@
 | Branch | `pd` | `develop` | `features` |
 |:--------|:--------|:--------|:--------|
 |Linux|![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
-|macOS| | | |
+|macOS| [![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) |
 
 ### GitHub Pages Status
 | Page | Status |
@@ -97,6 +97,21 @@ Due to complex dependency requirements of `substrateminer`, conda is recomand to
 ```
 
 ## Methods and Functions
+### Multiple Sequence Alignment (MSA)
+```
+usage: msa.py [-h] -i INPUT -o OUTPUT -m METHOD
+
+Perform multiple sequence alignment
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        Input file path
+  -o OUTPUT, --output OUTPUT
+                        Output file path
+  -m METHOD, --method METHOD
+                        Alignment method (clustalomega, mafft, muscle)
+```
 
 ### Motif
 ```
