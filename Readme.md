@@ -9,13 +9,13 @@
 
 | Branch | `main` | `develop` | `features` |
 |:--------|:--------|:--------|:--------|
-|Linux|![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
-|macOS| [![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) |
+|Linux|![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
+|macOS| [![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) |
 
 ### GitHub Pages Status
 | Page | Status |
 |:--------|:--------|
-|substrateminer|[![pages-build-deployment](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment)
+|substrateminer|[![pages-build-deployment](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/pages/pages-build-deployment)
 
 
 ## TL;DR
@@ -265,4 +265,4 @@ CI/CD is carried out with GitHub Actions workflow and consists following steps:
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Issue/Bug Reports and Contributions
-We welcome contributions to `substrateminer`. If you would like to contribute, please fork the repository and submit a pull request. For major changes, please [open an issue](https://github.com/manifestoso/substrateminer/issues) first to discuss what you would like to change.
+We welcome contributions to `substrateminer`. If you would like to contribute, please fork the repository and submit a pull request. For major changes, please [open an issue](https://github.com/DPP4ResearchGroup/substrateminer/issues) first to discuss what you would like to change.
