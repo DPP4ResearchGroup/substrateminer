@@ -1,0 +1,9 @@
+O75616, hsa
+Q9BUE6, hsa
+Q99797, hsa
+Q9P015, hsa
+P24752, hsa
+Q6NUN0, hsa
+Q96IL0, hsa
+Q8N5M1, hsa
+P54819, hsa

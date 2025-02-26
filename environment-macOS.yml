@@ -1,0 +1,32 @@
+name: substrate-miner
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.10
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib<3.6
+  - biopython>=1.84
+  - mafft>=5.1
+  - muscle<=3.9
+  - weblogo
+  - yaml
+  - click
+  - pip:
+      - requests
+      - click
+      - pyyaml
+      - certifi
+      - fonttools
+      - pillow
+      - six
+      - urllib3
+
+  # Platform-specific dependencies
+  - blas=*=openblas  # Ensures OpenBLAS-based performance for NumPy/Scipy where possible
+
+# OS-Specific Handling
+  - llvm-openmp [osx] # macOS needs OpenMP separately
