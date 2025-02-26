@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "substrateminer"
+version = "0.9.0rc1"
+description = "A python package to discover enzyme substrates based on sequence consensus"
+readme = "README.md"
+requires-python = ">=3.10.1"
+license = {text = "MIT"}
+authors = [
+    {name = "Robert QIAO", email = "robert.qiao@flinders.edu.au"}
+]
+urls = { homepage = "https://github.com/DPP4ResearchGroup/substrateminer" }
+keywords = ["bioinformatics", "enzyme", "substrate", "discovery", "consensus"]
+
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "biopython>=1.84",
+    "weblogo",
+    "requests",
+    "click",
+    "PyYAML",
+    "certifi",
+    "fonttools",
+    "pillow"
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "black", "flake8"]
+
+[project.scripts]
+substrateminer = "substrate_miner.main:substrateminer"
+
+[tool.setuptools.packages.find]
+include = ["substrate_miner*"]  # Include only `substrate_miner` and submodules
+exclude = ["unittests*", "docs*", "paper*"]  # Exclude test and documentation packages

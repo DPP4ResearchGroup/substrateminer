@@ -1,0 +1,8 @@
+# This file is used to configure the Jekyll site.
+
+theme: jekyll-theme-minimal
+title: SubstrateMiner
+description: A tool for mining substrate sequences from protein structures.
+show_downloads: true
+logo: /assets/png/logo-2.jpg
+show_downloads: false

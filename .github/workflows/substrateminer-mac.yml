@@ -1,0 +1,63 @@
+name: substrateminer releasing - MacOS
+
+on:
+  push:
+    branches: [main, develop, features]
+  pull_request:
+    branches: [main, develop, releases]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            label: osx-64
+            ENV_FILE: environment-macOS.yml
+            prefix: /Users/runner/conda_pkgs_dir
+            pip_path: /Library/Caches/pip
+            defaults:
+              run:
+                shell: bash -el {0}
+  
+    steps:      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'  # Change as needed
+
+      - name: Cache conda environment
+        id: cache-conda
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ runner.tool_cache }}
+            ${{ matrix.prefix }}
+            ${{ matrix.pip_path }}
+          key: ${{ runner.os }}-conda-${{ hashFiles(matrix.ENV_FILE) }}
+          restore-keys: |
+            ${{ runner.os }}-conda-
+
+      - name: Create conda environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniconda-version: 'latest'
+          channel-priority: true
+          auto-update-conda: false
+          auto-activate-base: false
+          environment-file: ${{ matrix.ENV_FILE }}
+          activate-environment: substrate-miner
+
+      
+      - name: Install package & run tests
+        run: |
+          conda env export  # debug
+          pip install -e .
+          substrateminer --help
+          conda run -n substrate-miner python -m unittest\
+            discover -s unittests -p "test_*.py"

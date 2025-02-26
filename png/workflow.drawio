@@ -1,0 +1,78 @@
+<mxfile host="65bd71144e">
+    <diagram id="q1hu6_QDNz9plujKN0-Z" name="Page-1">
+        <mxGraphModel dx="803" dy="684" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;Protein/Peptides Sequences in fasta format" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="140" width="120" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;startArrow=classicThin;startFill=0;" edge="1" parent="1" source="8" target="9">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="530" y="195" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="17">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Motif" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="95" width="200" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="edgeStyle=none;html=1;" edge="1" parent="8" source="4" target="3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Consensus" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="8">
+                    <mxGeometry x="55" y="20" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Weblogo" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="8">
+                    <mxGeometry x="55" y="110" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="edgeStyle=none;html=1;startArrow=classicThin;startFill=0;endArrow=none;endFill=0;" edge="1" parent="1" source="9" target="6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="MSA Aligner" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="310" y="60" width="210" height="270" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Musle Adaptor" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="9">
+                    <mxGeometry x="40" y="30" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Mufft Adaptor" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="9">
+                    <mxGeometry x="40" y="100" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="ClustalO Adaptor" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="9">
+                    <mxGeometry x="40" y="180" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="shape=waypoint;sketch=0;size=6;pointerEvents=1;points=[];fillColor=default;resizable=0;rotatable=0;perimeter=centerPerimeter;snapToPoint=1;fontStyle=1;startSize=23;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="185" width="20" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="17" target="24">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Miner" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="595" y="390" width="210" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="edgeStyle=none;html=1;" edge="1" parent="17" source="19" target="20">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="size miner" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="17">
+                    <mxGeometry x="55" y="20" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="edgeStyle=none;html=1;" edge="1" parent="17" source="20" target="21">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="motif miner" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="17">
+                    <mxGeometry x="55" y="110" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="loc miner" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="17">
+                    <mxGeometry x="55" y="200" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="Pathfinder" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="325" y="430" width="200" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="KEGG matcher" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="24">
+                    <mxGeometry x="50" y="70" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
