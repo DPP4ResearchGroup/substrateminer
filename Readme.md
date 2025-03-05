@@ -93,7 +93,7 @@ $ substrateminer miner --referencefile unittests/data/test-uniprot.txt --config 
 #### Pathfinder
 To identify the molecular path for a substrate, the `pathfinder` subcommand can be used.
 ```
-$ substrateminer pathfinder -i unittests/data/uniprot_id_short.txt -o path.txt -a```
+$ substrateminer pathfinder -i unittests/data/uniprot_id_short.txt -o path.txt -a
 ```
 
 ## Requirements
