@@ -22,6 +22,14 @@ from Bio import SeqIO
 
 ## Aux Functions
 def convert_bytes(size_in_bytes):
+    """
+    Convert bytes to a human-readable format (KB, MB, GB).
+    Args:
+        size_in_bytes (int): Size in bytes to be converted.
+    Returns:
+        str: Human-readable size string.
+    """ 
+    
     if size_in_bytes >= 1024 ** 3:  # If size is in GB
         size_in_gb = size_in_bytes / (1024 ** 3)
         return f"{size_in_gb:.2f} GB"
@@ -36,6 +44,18 @@ def convert_bytes(size_in_bytes):
     
 ## Record Handle Switch
 def record_handle_switch(handle, referencetype, referencefile):
+    """
+    Switches the record handling based on the reference type.
+    Args:
+        handle (file object): The file handle for the reference file.
+        referencetype (str): The type of the reference file (e.g., "swiss", "genbank", "embl").
+        referencefile (str): The path to the reference file.
+    Returns:
+        list: A list of records parsed from the reference file.
+    Raises:
+        ValueError: If the reference type is not supported.
+    """
+    
     record_switch = {
         "embl": case_embl,
         "swiss": case_swiss,
@@ -46,6 +66,17 @@ def record_handle_switch(handle, referencetype, referencefile):
     return records
 
 def case_swiss(handle, referencefile):
+    """
+    Parses a SwissProt file and returns the records.
+    Args:
+        handle (file object): The file handle for the SwissProt reference file.
+        referencefile (str): The path to the SwissProt reference file.
+    Returns:
+        list: A list of records parsed from the SwissProt file.
+    Raises:
+        ValueError: If the reference type is not supported.
+    """
+    
     records = list(SwissProt.parse(handle))
     record_size_handle = convert_bytes(sys.getsizeof(records))
     
@@ -58,6 +89,17 @@ def case_swiss(handle, referencefile):
     return records, record_swiss
 
 def case_genbank(handle, referencefile):
+    """
+    Parses a GenBank file and returns the records.
+    Args:
+        handle (file object): The file handle for the GenBank reference file.
+        referencefile (str): The path to the GenBank reference file.
+    Returns:
+        list: A list of records parsed from the GenBank file.
+    Raises:
+        ValueError: If the reference type is not supported.
+    """
+
     records = list(SeqIO.parse(handle, "genbank"))
     record_size_handle = convert_bytes(sys.getsizeof(records))
 
@@ -69,6 +111,17 @@ def case_genbank(handle, referencefile):
     return records
 
 def case_embl(handle, referencefile):
+    """
+    Parses an EMBL file and returns the records.
+    Args:
+        handle (file object): The file handle for the EMBL reference file.
+        referencefile (str): The path to the EMBL reference file.
+    Returns:
+        list: A list of records parsed from the EMBL file.
+    Raises:
+        ValueError: If the reference type is not supported.
+    """
+
     records = list(SeqIO.parse(handle, "embl"))
     record_size_handle = convert_bytes(sys.getsizeof(records))
     

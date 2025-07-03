@@ -89,12 +89,20 @@ def msa_switch(args):
     msa_click(sys.argv[2:])
 
 def msa_click(args):
+    """
+    Click command to handle multiple sequence alignment.
+    This function processes command line arguments and calls the main alignment function.
+    Args:
+        args (list): List of command line arguments passed to the script.
+    """
+    
     # debug block
     #print("%%%%%%%%%%%%%%%%%%%%%%%  DEBUG  %%%%%%%%%%%%%%%%%%%%%%%")
     #print("click pathway")
     #print(args)
     #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 
+    # If no arguments are provided, show help message
     if not any(args):
         sys.argv = ['msa.py', '-h']
 
