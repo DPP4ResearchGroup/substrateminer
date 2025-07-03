@@ -10,13 +10,13 @@
 
 | Branch | `main` | `develop` | `features` |
 |:--------|:--------|:--------|:--------|
-|Linux|![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
-|macOS| [![substrateminer-main](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/manifestoso/substrateminer/actions/workflows/substrateminer-mac.yml) |
+|Linux|![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
+|macOS| [![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) |
 
 ### GitHub Pages Status
 | Page | Status |
 |:--------|:--------|
-|substrateminer|[![pages-build-deployment](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/manifestoso/substrateminer/actions/workflows/pages/pages-build-deployment)
+|substrateminer|[![pages-build-deployment](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/pages/pages-build-deployment)
 
 
 ## TL;DR
@@ -94,7 +94,7 @@ $ substrateminer miner --referencefile unittests/data/test-uniprot.txt --config 
 #### Pathfinder
 To identify the molecular path for a substrate, the `pathfinder` subcommand can be used.
 ```
-$ substrateminer pathfinder -i unittests/data/uniprot_id_short.txt -o path.txt -a```
+$ substrateminer pathfinder -i unittests/data/uniprot_id_short.txt -o path.txt -a
 ```
 
 ## Requirements
@@ -116,7 +116,7 @@ Optional binary dependencies for multiple sequence alignment:
 - MAFFT 7.475 or later
 
 ## Installation
-Due to complex dependency requirements of `substrateminer`, conda is recomand to here.
+Due to complex dependency requirements of `substrateminer`, conda is recommended to here.
 
 `substrateminer` package provides both Linux and MacOS support, the following conda environment files can be used accordingly to install conda environment  `substrate-miner`:
 
