@@ -265,5 +265,15 @@ CI/CD is carried out with GitHub Actions workflow and consists following steps:
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Issue/Bug Reports and Contributions
-We welcome contributions to `substrateminer`. If you would like to contribute, please fork the repository and submit a pull request. For major changes, please [open an issue](https://github.com/manifestoso/substrateminer/issues) first to discuss what you would like to change.
+## Issue/Bug Reports
+Any issues you encounter with `substrateminer`, please report by [open a bug issue](https://github.com/manifestoso/substrateminer/issues) and provide as much details as possible, including examples, error messages and environment setup will be highly appreciated.
+
+## Contributing
+We welcome contributions to `substrateminer`. To contribute, please follow the steps below:
+1. Fork the repository to your designated location.
+1. Create a new branch with a descriptive name for your proposed feature and/or bugfix.
+1. Make your changes and commit them with clear and concise commit messages.
+1. Push your changes to your forked repository.
+1. Submit a pull request. 
+
+> **__Major changes:__** please [open an issue](https://github.com/manifestoso/substrateminer/issues) first to discuss what you would like to change.
