@@ -1,17 +1,78 @@
 # substrateminer
+
+[![status](https://joss.theoj.org/papers/09b68390d13060894366a1626b45aa05/status.svg)](https://joss.theoj.org/papers/09b68390d13060894366a1626b45aa05)
+
 `substrateminer` is a python package that offer a suite of discovery tools to investigate enzyme substrate repertorie based on sequence cleavage consensus.
 
 ## CI/CD Status
+
 ### UnitTest Status
 
-| Branch | `main` | `develop` | `features` |
-|:--------|:--------|:--------|:--------|
-|Linux|![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)|![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)|![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)|
-|macOS| [![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml)| [![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) |
+| Branch | `main`                                                                                                                                                                                                                                     | `develop`                                                                                                                                                                                                                                    | `features`                                                                                                                                                                                                                                         |
+|:-------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Linux  | ![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=main)                                                                                                          | ![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=develop)                                                                                                          | ![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/python-ci.yml/badge.svg?branch=features)                                                                                                          |
+| macOS  | [![substrateminer-main](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=main)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-dev](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=develop)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) | [![substrateminer-features](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml/badge.svg?branch=features)](https://github.com/DPP4ResearchGroup/substrateminer/actions/workflows/substrateminer-mac.yml) |
 
+## Starting Guide
 
-## Quick Start Guide
-`substrateminer` provides three main categories of functionalities namely `motif`, `miner`, and `pathfinder`, `substrateminer` also integrates multi-sequence alignment tools to facilitate the analysis.
+### Installation Guide
+
+Due to complex dependency requirements of `substrateminer`, conda is recommended here. Please ensure that you have conda installed on your system. If you do not have conda installed, please refer to the [Miniconda installation guide](https://docs.conda.io/en/latest/miniconda.html).
+
+Firstly, download a copy of the latest release of `substrateminer` from the [GitHub Releases page](https://github.com/DPP4ResearchGroup/substrateminer/releases/latest) to a chosen local path before setup the required `conda` environment as instructed below. `substrateminer` supports both Linux and MacOS platforms, please choose the appropriate environment file based on your platform as follows:
+
+```
+# For Linux users
+$ cd substrateminer
+$ conda env create -f environment-Linux.yml # Linux support
+$ conda activate substrateminer
+```
+
+OR
+
+```
+# For MacOS users
+$ cd substrateminer
+$ conda env create -f environment-macOS.yml # MacOS support
+$ conda activate substrateminer
+```
+
+Then install `substrateminer` package as below:
+
+```
+$ pip install .      # utility mode
+$ pip install -e .   # debug mode
+```
+
+Testing the installation with the help command
+
+```
+$ substrateminer --help
+```
+
+#### Requirements
+
+`substrateminer` requires the following dependencies:
+- Python >= 3.10.11
+- BioPython >= 1.84
+- Numpy
+- SciPy
+- Pandas
+- matplotlib <= 3.6.0
+- weblogo
+- requests
+- click
+- PyYAML
+- pillow
+  Optional binary dependencies for multiple sequence alignment:
+- Clustal Omega >= 1.2.4
+- MUSCLE >= 5.1
+- MAFFT >= 7.475
+
+### Quick Start
+
+`substrateminer` provides three main categories of functionalities namely `motif`, `miner`, and `pathfinder`. `substrateminer` also integrates multi-sequence alignment tools to facilitate the analysis.
+
 ```
 Usage: substrateminer [OPTIONS] COMMAND [ARGS]...
 
@@ -28,85 +89,49 @@ Commands:
   msa         Interface for multi-sequence alignments
   pathfinder  Find the pathological/molecular path for a substrate.
 ```
-### Installation/Setup
-Download and setup conda environment befefore install `substrateminer` package with pip.
-```
-$ cd substrateminer
-$ conda env create -f environment-Linux.yml
-$ conda activate substrateminer
-```
-Install `substrateminer` package
-```
-$ pip install .      # utility mode
-$ pip install -e .   # debug mode
-```
-Testing the installation with the help command
-```
-$ substrateminer --help
-```
 
-### Examples:
-#### Motif
+#### Usage Examples
+
+<a id="motif"></a> **Motif**
+
 Consensus can be derived from a collection of sequences using the `consensus` subcommand.
+
 ```
 $ substrateminer motif consensus -i unittests/data/msa_align.fas -O . 
 ```
+
 The conservation of the conseqnsus can be visualised using the `weblogo` subcommand.
+
 ```
 substrateminer motif weblogo -i unittests/data/weblogo_align.fas -o weblogo_output.png
 ```
 
-#### Miner
+<a id="miner"></a> **Miner**
+
 To identify potential substrates (degradome) from a collection of sequences (this is commonly proteom of a species), the `miner` subcommand can be used.
+
 ```
 $ substrateminer miner --referencefile unittests/data/test-uniprot.txt --config unittests/test-config.yml --filtermode size --outmode inline
 ```
 
-#### Pathfinder
+<a id="pathfinder"></a> **Pathfinder**
+
 To identify the molecular path for a substrate, the `pathfinder` subcommand can be used.
+
 ```
 $ substrateminer pathfinder -i unittests/data/uniprot_id_short.txt -o path.txt -a
 ```
 
-## Requirements
-`substrateminer` requires the following dependencies:
-- Python 3.10.11 or later
-- BioPython 1.84 or later
-- Numpy
-- SciPy
-- Pandas
-- matplotlib 3.6.0 or older
-- weblogo
-- requests
-- click
-- PyYAML
-- pillow
+### Customised workflow
 
+`substrateminer` is designed to provide a suite of methods to investigate enzyme substrate repertorie based on sequence cleavage consensus. The package is modular and extensible and can be used to design custom workflows. The following demonstrates a typical workflow:
 
-Optional binary dependencies for multiple sequence alignment:
-- Clustal Omega 1.2.4 or later
-- MUSCLE 5.1 or later
-- MAFFT 7.475 or later
+![Design Workflow](../png/workflow.png)
 
-## Installation
-Due to complex dependency requirements of `substrateminer`, conda is recomand to here.
+#### Methods and Functions Overview
 
-`substrateminer` package provides both Linux and MacOS support, the following conda environment files can be used accordingly to install conda environment  `substrate-miner`:
-```
-$ conda env create -f environment-Linux.yml # Linux supoort
-$ conda env create -f environment-MacOS.yml # MacOS support
-```
+###### Multiple Sequence Alignment (MSA)
 
-## Design Workflow
-`substrateminer` is designed to provide a suite of tools to investigate enzyme substrate repertorie based on sequence cleavage consensus. The package is modular and extensible, following demonstrates a typical workflow:
-
-![Design Workflow](assets/png/workflow.png)
-
-## Methods and Functions
-All subcommands of `substrateminer` support CLI help function, function specific instructions can be accessed by adding the `-h` flag to the subcommand.
-
-
-### Multiple Sequence Alignment (MSA)
 ```
 usage: msa.py [-h] -i INPUT -o OUTPUT -m METHOD
 
@@ -122,7 +147,8 @@ options:
                         Alignment method (clustalomega, mafft, muscle)
 ```
 
-### Motif
+###### Motif
+
 ```
 usage: consensus.py [-h] {consensus,weblogo} ...
 
@@ -137,7 +163,9 @@ positional arguments:
 options:
   -h, --help           show this help message and exit
 ```
-#### Consensus
+
+<a id="consensus"></a> **Consensus**
+
 ```
 usage: consensus.py consensus [-h] -i Input alignment file in FASTA format.
                               [-o Output gap stripped FASTA file name] [-O Output directory]
@@ -165,7 +193,9 @@ options:
                         (default: 0.5)
   -f                    Include flag to prevent saving images of MSA data analysis.
 ```
-#### Weblogo
+
+<a id="weblogo"></a> **Weblogo**
+
 ```
 usage: consensus.py weblogo [-h] -i INPUTFILE -o FILENAME [-s RESOLUTION] [-F FILETYPE]
 
@@ -176,7 +206,9 @@ options:
   -s RESOLUTION  Resolution of the weblogo image.
   -F FILETYPE    File type of the output image.
 ```
-### Miner
+
+###### Miner
+
 ```
 Usage: substrateminer miner [OPTIONS]
 
@@ -202,7 +234,8 @@ Options:
   --help                          Show this message and exit.
 ```
 
-### Pathfinder
+###### Pathfinder
+
 ```
 Usage: substrateminer pathfinder [OPTIONS]
 
@@ -218,7 +251,10 @@ Options:
   -g, --orgs TEXT      Organism code for the KEGG API (default: hsa)
   --help               Show this message and exit.
 ```
-## GitHub Actions CI - UnitTests sequence
+
+## CI manual
+
+### UnitTests Sequence
 
 CI/CD is carried out with GitHub Actions workflow and consists following steps:
 
@@ -229,8 +265,17 @@ CI/CD is carried out with GitHub Actions workflow and consists following steps:
 - Runs CLI tests with pip.
 - Runs unit tests with unittest.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## Issue/Bug Reporting
 
-## Issue/Bug Reports and Contributions
-We welcome contributions to `substrateminer`. If you would like to contribute, please fork the repository and submit a pull request. For major changes, please [open an issue](https://github.com/DPP4ResearchGroup/substrateminer/issues) first to discuss what you would like to change.
+Any issues you encounter with `substrateminer`, please report by [open a bug issue](https://github.com/manifestoso/substrateminer/issues) and provide as much details as possible, including examples, error messages and environment setup will be highly appreciated.
+
+## Contributing
+
+We welcome contributions to `substrateminer`. To contribute, please follow the steps below:
+1. Fork the repository to your designated location.
+2. Create a new branch with a descriptive name for your proposed feature and/or bugfix.
+3. Make your changes and commit them with clear and concise commit messages.
+4. Push your changes to your forked repository.
+5. Submit a pull request.
+
+> ****Major changes:**** please [open an issue](https://github.com/manifestoso/substrateminer/issues) first to discuss what you would like to change.

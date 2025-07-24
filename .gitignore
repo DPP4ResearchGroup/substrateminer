@@ -172,3 +172,4 @@ unittests/*_output.*
 *_output.*
 
 *.pdf
+*_test.md

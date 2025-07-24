@@ -1,6 +1,16 @@
-from Bio import SeqIO
-from Bio.Align.Applications import ClustalOmegaCommandline, MafftCommandline, MuscleCommandline
+#######
+# ChangeLog:
+# - Updated to deprecate Bio.Align.Applications for ClustalOmega, MAFFT, and MUSCLE.
+# - Added subprocess calls for these tools.
+#######
 
+from Bio import SeqIO
+#######
+# Align.Applications is now deprecated in Biopython 1.80+.
+# from Bio.Align.Applications import ClustalOmegaCommandline, MafftCommandline, MuscleCommandline
+#######
+
+import subprocess
 import argparse
 import click
 import sys
@@ -42,17 +52,44 @@ def perform_msa(input_file, output_file, method):
             os.remove(output_file)
 
         # Perform multiple sequence alignment using the specified method
-        if method == "clustalomega":
-            clustalomega_cline = ClustalOmegaCommandline(infile=input_file,\
-                outfile=output_file, verbose=True, auto=True)
-            stdout, stderr = clustalomega_cline()
+        if method == "clustal":
+            #######
+            # Change to subprocess call for ClustalOmega, as Bio.Align.Applications is deprecated
+            # clustalomega_cline = ClustalOmegaCommandline(infile=input_file,\
+            #    outfile=output_file, verbose=True, auto=True)
+            if sys.platform != "darwin":
+                clustalomega_exe = shutil.which("clustalo")
+            else:
+                clustalomega_exe = shutil.which("clustalw")
+                
+            if clustalomega_exe is None:
+                raise FileNotFoundError("ClustalOmega executable not found.\
+                    Please ensure it is installed and in your PATH.")
+            clustalomega_cline = subprocess.run([clustalomega_exe, "-i", input_file, "-o", output_file, "--force",\
+                "--verbose"], capture_output=True, text=True)
+            stdout, stderr = clustalomega_cline.stdout, clustalomega_cline.stderr
         elif method == "mafft":
             mafft_exe = shutil.which("mafft")
             if mafft_exe is None:
                 raise FileNotFoundError("MAFFT executable not found.\
                     Please ensure it is installed and in your PATH.")
-            mafft_cline = MafftCommandline(mafft_exe, input=input_file)
-            stdout, stderr = mafft_cline()
+            
+            #######
+            # Change to subprocess call for MAFFT, as Bio.Align.Applications is deprecated
+            # # mafft_cline = MafftCommandline(mafft_exe, input=input_file)
+            # stdout, stderr = mafft_cline()
+            # with open(output_file, "w") as mafft_w_handle:
+            #     mafft_w_handle.write(stdout)
+            #######
+            
+            # Use subprocess to call MAFFT
+            # Note: The input file should be in FASTA format
+            mafft_cline = subprocess.run([mafft_exe, input_file], capture_output=True, text=True)
+            stdout, stderr = mafft_cline.stdout, mafft_cline.stderr
+            # Write the output to the specified output file
+            if not stdout:
+                raise ValueError("MAFFT did not produce any output. Check the input file format.")
+            # Write the alignment results to the output file
             with open(output_file, "w") as mafft_w_handle:
                 mafft_w_handle.write(stdout)
         elif method == "muscle":
@@ -60,9 +97,24 @@ def perform_msa(input_file, output_file, method):
             if muscle_exe is None:
                 raise FileNotFoundError("MUSCLE executable not found.\
                     Please ensure it is installed and in your PATH.")
-            muscle_cline = MuscleCommandline(muscle_exe, input=input_file,\
-                out=output_file)
-            stdout, stderr = muscle_cline()
+            
+            #######
+            # Change to subprocess call for MUSCLE, as Bio.Align.Applications is deprecated
+            # muscle_cline = MuscleCommandline(muscle_exe, input=input_file,\
+            #                                   out=output_file)
+            # stdout, stderr = muscle_cline()
+            # with open(output_file, "w") as muscle_w_handle:
+            #     muscle_w_handle.write(stdout)
+            #######
+            
+            # Use subprocess to call MUSCLE
+            muscle_cline = subprocess.run([muscle_exe, "-in", input_file, "-out", output_file], capture_output=True, text=True)
+            stdout, stderr = muscle_cline.stdout, muscle_cline.stderr
+            if stderr:
+                raise ValueError(f"MUSCLE encountered an error: {stderr.strip()}")
+            # Write the alignment results to the output file
+            with open(output_file, "w") as muscle_w_handle:
+                muscle_w_handle.write(stdout)
         else:
             raise ValueError("Invalid alignment method specified")
 
@@ -89,12 +141,20 @@ def msa_switch(args):
     msa_click(sys.argv[2:])
 
 def msa_click(args):
+    """
+    Click command to handle multiple sequence alignment.
+    This function processes command line arguments and calls the main alignment function.
+    Args:
+        args (list): List of command line arguments passed to the script.
+    """
+    
     # debug block
     #print("%%%%%%%%%%%%%%%%%%%%%%%  DEBUG  %%%%%%%%%%%%%%%%%%%%%%%")
     #print("click pathway")
     #print(args)
     #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 
+    # If no arguments are provided, show help message
     if not any(args):
         sys.argv = ['msa.py', '-h']
 
@@ -103,11 +163,25 @@ def msa_click(args):
     msa_main()
 
 def msa_main():
+    """
+    Main function for multiple sequence alignment.
+    """
+    if sys.platform == "darwin":
+        allowed_methods = ["mafft", "muscle"]
+    else:
+        allowed_methods = ["mafft", "muscle", "clustal"]
+        
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="Perform multiple sequence alignment")
     parser.add_argument("-i", "--input", help="Input file path", required=True)
     parser.add_argument("-o", "--output", help="Output file path", required=True)
-    parser.add_argument("-m", "--method", help="Alignment method (clustalomega, mafft, muscle)", required=True)
+    parser.add_argument(
+        "-m", "--method",
+        help="Alignment method (clustal(linux), mafft, muscle)",
+        required=False,
+        choices=allowed_methods,
+        default=allowed_methods[0]
+    )
     args = parser.parse_args()
 
     # Perform multiple sequence alignment

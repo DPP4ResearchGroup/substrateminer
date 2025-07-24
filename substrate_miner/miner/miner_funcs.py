@@ -21,12 +21,29 @@ GLOBAL_TARGET_PEPTIDES_TYPE = ['SIGNAL', 'CHAIN', 'PEPTIDE']
 
 # Define return class
 class filteredRecords:
+	'''
+	A class to store filtered records from a database query.
+	Attributes:
+		extracted_target_records (list): A list of records that match the target criteria.
+		extracted_non_target_records (list): A list of records that do not match the target criteria.
+	'''
+ 
 	def __init__(self) -> None:
 		self.extracted_target_records = []
 		self.extracted_non_target_records = []
 		pass
 	
 	def _writeRecords(self, records: list, nontarget_records: list) -> dict[str, list]:
+		'''
+		Args:
+			records (list): A list of protein records that match the target criteria.
+			nontarget_records (list): A list of protein records that do not match the target criteria.
+		Returns:
+			dict[str, list]: A dictionary containing the target and non-target records.
+		Raises:
+			None
+		'''
+		self.extracted_target_records = records
 		return {"target": records, "nontarget": nontarget_records}
 
 ## Aux functions
