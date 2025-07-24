@@ -3,7 +3,7 @@ Consensus can be derived from a collection of sequences using the `consensus` su
 ```
 $ substrateminer motif consensus -i unittests/data/msa_align.fas -O . 
 ```
-The conservation of the conseqnsus can be visualised using the `weblogo` subcommand.
+The conservation of the consensus can be visualised using the `weblogo` subcommand.
 ```
 substrateminer motif weblogo -i unittests/data/weblogo_align.fas -o weblogo_output.png
 ```
