@@ -1,4 +1,4 @@
-name: substrate-miner
+name: substrateminer
 channels:
   - conda-forge
   - bioconda
