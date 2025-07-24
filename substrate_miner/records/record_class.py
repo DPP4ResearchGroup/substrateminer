@@ -10,6 +10,14 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 class filterOutput:
+	"""
+	A class to store filtered records from a database query.
+	Attributes:
+		target (list): A list of records that match the target criteria.
+		non_target (list): A list of records that do not match the target criteria.
+		# unknown (list): A list of records that are not classified as target or non-target.
+	"""
+ 
 	def __init__(self, target_records: list, non_target_records: list) -> dict:
 		self.target = target_records
 		self.non_target = non_target_records
@@ -17,6 +25,17 @@ class filterOutput:
 		pass	
  
 class emblRecord:
+	"""
+	A class to represent an EMBL record.
+	Attributes:
+		seq (Seq): The sequence of the record.
+		id (str): The identifier of the record.
+		name (str): The name of the record.
+		description (str): The description of the record.
+		annotations (dict): A dictionary of annotations for the record.
+		features (list): A list of SeqFeature objects representing features of the record.
+	"""
+ 
 	def __init__(self, seq: Seq, id: str, name: str, description, annotations, features) -> None:
 		self.seq = seq
 		self.id = id
@@ -28,6 +47,17 @@ class emblRecord:
 
 # Definition of uniprot record class
 class swissRecord:
+	"""
+	A class to represent a Swiss-Prot record.
+	Attributes:
+		accessions (list): A list of accession numbers for the record.
+		entry_name (str): The entry name of the record.
+		keywords (list): A list of keywords associated with the record.
+		description (str): The description of the record.
+		features (list): A list of SeqFeature objects representing features of the record.
+		sequence (str): The sequence of the record.
+	"""
+  
 	def __init__(self, accessions, entry_name, keywords, description, features, sequence) -> None:
 		self.accessions = accessions
 		self.entry_name = entry_name
@@ -38,6 +68,18 @@ class swissRecord:
 		pass
 	
 class swissRecord2:
+	"""
+	A class to represent a Swiss-Prot record with additional organism information.
+	Attributes:
+		accessions (list): A list of accession numbers for the record.
+		entry_name (str): The entry name of the record.
+		keywords (list): A list of keywords associated with the record.
+		description (str): The description of the record.
+		features (list): A list of SeqFeature objects representing features of the record.
+		sequence (str): The sequence of the record.
+		organism (str): The organism associated with the record.
+	"""
+ 
 	def __init__(self, accessions, entry_name, keywords, description, features, sequence, organism) -> None:
 		self.accessions = accessions
 		self.entry_name = entry_name
@@ -49,6 +91,12 @@ class swissRecord2:
 		pass
 	
 	def _sR2eR(self) -> list[emblRecord]:
+		"""
+		Converts a Swiss-Prot record to an EMBL record format.
+		Returns:
+			list[emblRecord]: A list containing an emblRecord object representing the Swiss-Prot record.
+		"""
+  
 		# Extract data from the Swiss-Prot record
 		seq = Seq(self.sequence)
 		description = self.description
@@ -84,6 +132,15 @@ class swissRecord2:
 		return seq_records
 
 	def _writeRecord(self, out_file, format) -> None:
+		"""
+		Writes the Swiss-Prot record to a file in the specified format.
+		Args:
+			out_file (str): The output file path where the record will be written.
+			format (str): The format in which to write the record. Options are "fasta", "text", "genbank", or "swiss".
+		Raises:
+			ValueError: If an unknown format is requested.
+		"""
+  
 		if format == "fasta":
 			fasta_record = SeqRecord(Seq(self.sequence), id=self.accessions, name=self.entry_name, description=self.description)
 			SeqIO.write(fasta_record, out_file, "fasta")
@@ -122,6 +179,17 @@ class swissRecord2:
 		
 
 class genBank:
+	"""
+	A class to represent a GenBank record.
+	Attributes:
+		accessions (list): A list of accession numbers for the record.
+		entry_name (str): The entry name of the record.
+		keywords (list): A list of keywords associated with the record.
+		description (str): The description of the record.
+		features (list): A list of SeqFeature objects representing features of the record.
+		sequence (str): The sequence of the record.
+	"""
+ 
 	def __init__(self, accessions, entry_name, keywords, description, features, sequence) -> None:
 		self.accessions = accessions
 		self.entry_name = entry_name
@@ -181,6 +249,15 @@ class seqLocation:
 
 # Definition of motif features class
 class motifFeatures:
+	"""
+	A class to represent motif features in a sequence.
+	Attributes:
+		type (str): The type of motif, either "exo" or "endo".
+		motif (str): The motif sequence.
+		terminal (bool): Indicates if the motif is terminal.
+		features (dict): A dictionary containing features of the motif.
+	"""
+ 
 	def __init__(self, type, motif, terminal) -> None:
 		self.type = type
 		self.motif = motif

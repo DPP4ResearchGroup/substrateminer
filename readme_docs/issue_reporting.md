@@ -1,0 +1,1 @@
+Any issues you encounter with `substrateminer`, please report by [open a bug issue](https://github.com/manifestoso/substrateminer/issues) and provide as much details as possible, including examples, error messages and environment setup will be highly appreciated.

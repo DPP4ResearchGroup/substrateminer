@@ -1,4 +1,4 @@
-name: substrate-miner
+name: substrateminer
 channels:
   - conda-forge
   - bioconda
@@ -15,6 +15,7 @@ dependencies:
   - weblogo
   - yaml
   - click
+  - ghostscript<=9.54.0 # Ghostscript for image processing, macOS users may need to install via Homebrew
   - pip:
       - requests
       - click
@@ -27,6 +28,5 @@ dependencies:
 
   # Platform-specific dependencies
   - blas=*=openblas  # Ensures OpenBLAS-based performance for NumPy/Scipy where possible
-
-# OS-Specific Handling
-  - llvm-openmp [osx] # macOS needs OpenMP separately
+  # OS-Specific Handling
+  # - llvm-openmp  # OpenMP support for parallel processing on macOS
