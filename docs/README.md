@@ -33,7 +33,7 @@ OR
 ```
 # For MacOS users
 $ cd substrateminer
-$ conda env create -f environment-MacOS.yml # MacOS support
+$ conda env create -f environment-macOS.yml # MacOS support
 $ conda activate substrateminer
 ```
 
