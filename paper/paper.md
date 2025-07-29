@@ -42,13 +42,13 @@ A typical workflow for adopting `substrateminer` to investigate substrate degrad
 ## Consensus investigation
 `Substrateminer` provides a mechanism to visualise the cleavage consensus motif and calculate the strength of conservation at each site along the motif. The strength of conservation is calculated based on entropy and `substrateminer` is also packaged with auxiliary tools to provide multi-sequence alignment (MSA) access to help prepare the input data for consensus investigation. Consensus visualisation is created by calling implementation of weblogo [@Crooks01062004]. (\autoref{fig:weblogo})
 
-As of the current release, `substrateminer` supports two popular multi-alignment tools for proteins, namely `MUSCLE` (on default) [@gkh340] and `MAFFT` [@gkf436], while the Linux distribution supports additional implementation of `ClustalO` [@bi0313s48]. The cleavage motif consensus is calculated based on the frequency of amino acid residues at each position along the motif and the visualisation is proportional to the information content at each site. The information content $R$ at position $i$ for protein is defined by ~\autoref{eq:information_content}:
+As of the current release, `substrateminer` supports two popular multi-alignment tools for proteins, namely `MUSCLE` (on default) [@gkh340] and `MAFFT` [@gkf436], while the Linux distribution supports additional implementation of `ClustalO` [@bi0313s48]. The cleavage motif consensus is calculated based on the frequency of amino acid residues at each position along the motif and the visualisation is proportional to the information content at each site. The information content $R$ at position $i$ for protein is defined by \autoref{eq:information_content}:
 
 \begin{equation}\label{eq:information_content}
 R_i = -\log_2(20) - H(X_i)
 \end{equation}
 
-The strength of conservation is calculated based on Shannon entropy [@Shannon6773024] with the formulation in ~\autoref{eq:entropy}, and the consensus motif is defined as the most frequent amino acid residue at each position along the motif.
+The strength of conservation is calculated based on Shannon entropy [@Shannon6773024] with the formulation in \autoref{eq:entropy}, and the consensus motif is defined as the most frequent amino acid residue at each position along the motif.
 
 \begin{equation}\label{eq:entropy}
 H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i
