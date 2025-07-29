@@ -284,7 +284,7 @@ def consensus_main():
     parser_consensus.add_argument('-c', default='1', metavar = 'Method for removing insertions',\
         help='Desired method for removing insertions.\
                 1 = Positions with gap frequencies < threshold (0.5 default, change with -t flag).\
-                2 =  Positions with residue as most frequent character.\
+                2 = Positions with residue as most frequent character.\
                 3 = Positions with residues in a specific sequence. If not given will ask for user input upon running script. See README for further explantion of methods.'\
     )
     parser_consensus.add_argument('-t', type=float, default = 0.5, metavar = 'Gap frequency threshold', help='Gap frequecy threshold to define a consensus positions. Only valid for Option 1 for removing insertions. Must be a value between 0 and 1 (default: 0.5)')
