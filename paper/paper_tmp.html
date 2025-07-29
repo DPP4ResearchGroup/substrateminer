@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>paper.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="file:///Users/robqiao/Downloads/gits/R%3A%5C2.Travail%5C1.Enseignement%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css"><link rel="stylesheet" href="file:///Users/robqiao/Downloads/gits/D%3A%5Crdaros%5CCours%5C_1.Outils%5C2.Developpement%5C1.SCSS%5Cmain.css" type="text/css">
+</head>
+
+<body>
+    <h1 id="abstract">Abstract</h1>
+<p><code>Substrateminer</code> is a Python library that provides a suite of modular investigative methods that are based on protein sequence and cellular properties to support rapid development of <em>in silico</em> pipelines to discover and interrogate potential substrates for a target protease of interest. Three categories of methods included in <code>substrateminer</code> are consensus analysis, substrate mining, and pathological investigation, which together provide a well-suited toolkit to explore substrate repertoires also known as substrate degradome for a target protease.</p>
+<h1 id="statement-of-need">Statement of need</h1>
+<p>The ability to identify and discover novel protease <em>in situ</em> substrates is often a powerful first step towards understanding the biological functions of proteases and their implications in human health and disease. However, in traditional enzymology, substrates of a target enzyme are studied in a one-to-one relationship, arguably due to prohibitive cost involved in designing and deploying experimental assays with large quantity. Modern proteomics methods particularly the advancement in mass spectrometry, drastically reduce the cost associated with detecting substrate hydrolysis events at molecular level and now the study of substrates of a target enzyme at proteome level is no longer a distant fantasy. With these new possibilities, the lack of a modular system to enable rapid development of <em>in silico</em> pipeline to support preliminary discovery has been a bottleneck for new studies. Therefore, the introduction of <code>substrateminer</code> here aims to provide a versatile toolkit that enables fast modular development of <em>in silico</em> pipelines to facilitate the preliminary discovery that complement and accelerate the emerging experimental efforts.</p>
+<h1 id="background">Background</h1>
+<p>Proteolytic cleavage is a fundamental biochemical process in biology, which underpins many important biological processes that surround us from common food processing and digestion [@campbell2005biology] to cutting-edge industrial renewable energy production of cellulosic ethanol [@GUO2023128252;@osti_6943966]. Almost all proteolytic processes in nature are catalysed by enzymes and proteases are such an enzyme class that facilitates the biochemical reaction of cleaving peptide bonds. The inhibition of proteases has been a major intervention strategy in modern clinics to modulate molecular proteolytic processes to treat many physiological conditions including viral infections like HIV, hepatitis-C; metabolic dysfunctions like type-2 diabetes [@Scott2017]; and cancers [@Manasanch2017]. In the wake of the COVID-19 pandemic, proteases have emerged as a major therapeutic target for curbing fatality due to viral infections.[@ijms25158105;@v16030366;@ijms22115762]</p>
+<p>Nevertheless, one constraining factor that confronts the rapid development of protease inhibitory therapy is the undiscriminating nature of inhibition. This is a major challenge because most proteases are involved in a complex network of biological processes and a complete inhibition of one protease can lead to unintended consequences on many other biological processes. Therefore, identifying and understanding the substrate degradome of a target protease is an important preliminary step towards inhibitory therapy. Traditionally, the identification of protease substrates is often challenging due to the prohibitive cost of large scale deployment of target-designed immuno-based biochemistry assays and scarcity of adequate animal models. Modern advancements in proteomics, particularly the maturation of mass spectrometry [@HAN2008483] and soft-ionisation methods [@mas21900], started to become a cost effective alternative in identification of protease substrates at a proteome level. Therefore, the ability to rapidly develop <em>in silico</em> pipelines to support preliminary discovery of protease substrates is increasingly needed to complement the emerging experimental efforts. Here, the introduction of <code>substrateminer</code> aims to streamline the modular development of <em>in silico</em> pipelines for the preliminary discovery of substrate degradome for a target protease based on cleavage sequence consensus.</p>
+<h1 id="methods">Methods</h1>
+<p><code>Substrateminer</code> contains three main classes of functions (with a schematic depicted in \autoref{fig:workflow}), namely consensus investigation (via submodules msa and consensus), substrate mining (via submodule miner) and substrate biopathological pathway searching (via submodule pathfinder).</p>
+<p><img src="file:///Users/robqiao/Downloads/gits/substrateminer/paper/graphics/workflow.png" alt="Substrateminer workflow\label{fig:workflow}"></p>
+<p>A typical workflow for adopting <code>substrateminer</code> to investigate substrate degradome for a given protease often involves the following three main stages:</p>
+<h2 id="consensus-investigation">Consensus investigation</h2>
+<p><code>Substrateminer</code> provides a mechanism to visualise the cleavage consensus motif and calculate the strength of conservation at each site along the motif. The strength of conservation is calculated based on entropy and <code>substrateminer</code> is also packaged with auxiliary tools to provide multi-sequence alignment (MSA) access to help prepare the input data for consensus investigation. Consensus visualisation is created by calling implementation of weblogo [@Crooks01062004]. (\autoref{fig:weblogo})</p>
+<p>As of the current release, <code>substrateminer</code> supports two popular multi-alignment tools for proteins, namely <code>MUSCLE</code> (on default) [@gkh340] and <code>MAFFT</code> [@gkf436], while the Linux distribution supports additional implementation of <code>ClustalO</code> [@bi0313s48]. The cleavage motif consensus is calculated based on the frequency of amino acid residues at each position along the motif and the visualisation is proportional to the information content at each site. The information content $R$ at position $i$ for protein is defined by ~\autoref{eq:information_content}:</p>
+<p>\begin{equation}\label{eq:information_content}<br>
+R_i = -\log_2(20) - H(X_i)<br>
+\end{equation}</p>
+<p>The strength of conservation is calculated based on Shannon entropy [@Shannon6773024] with the formulation in ~\autoref{eq:entropy}, and the consensus motif is defined as the most frequent amino acid residue at each position along the motif.</p>
+<p>\begin{equation}\label{eq:entropy}<br>
+H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i<br>
+\end{equation}</p>
+<p><img src="file:///Users/robqiao/Downloads/gits/substrateminer/paper/graphics/weblogo-2.png" alt="Consensus investigation - Visualisation Example\label{fig:weblogo}"></p>
+<h2 id="substrate-mining">Substrate mining</h2>
+<p>Upon the identification of a cleavage consensus, <code>substrateminer</code> provides a mechanism to mine potential substrates based on three filter strategies:</p>
+<ol>
+<li><em>Cellular location</em>: filter potential substrates based on the cellular localisation of the intended target. For example, if the target protease is a secreted protease, the substrates mined should be extracellular proteins.</li>
+<li><em>Target Size</em>: filter potential substrates based on the size of the intended target. For example, if the target substrate is a small protease, the substrates mined should be small proteins or peptides of a specified size.</li>
+<li><em>Consensus</em>: filter potential substrates based on the conservation of the cleavage consensus. At the current release, both intra-protein cleavage (i.e., endopeptidase) and terminal cleavage (both C and N-terminal) (i.e., exopeptidase) consensus are supported.</li>
+</ol>
+<h2 id="substrate-pathobiological-pathway-searching">Substrate pathobiological pathway searching</h2>
+<p>To further investigate the pathobiological relevance of novel substrates, <code>substrateminer</code> implemented a search strategy to retrieve known biological processes and disease associations based on the <em>de facto</em> standard KEGG database [@10.1093;@pro3715]. In this present release, the <code>pathfinder</code> module in the <code>substrateminer</code> provides three main functions namely KEGG accession conversion, biological processes tracing and human disease mapping, where KEGG accession conversion enables a gateway to KEGG databases where further information including enzyme nomenclature and diseases-related network databases can be easily accessible.  Biological processes tracing allows users to trace the biological processes associated with a given substrate, and human disease mapping enables users to map the potential substrates to known human diseases based on KEGG disease database.</p>
+<p>As of the current release, <code>pathfinder</code> submodule queries all 580 KEGG molecular pathway maps and covers 1205 eukaryotes, 9375 bacteria and 449 archaea. [@kegg_statistics_2025] Nevertheless, the diseases covered are limited to human context.</p>
+<h1 id="limitations">Limitations</h1>
+<p>The current release of <code>substrateminer</code> is limited to the investigation of protease substrates based on substrate primary sequence consensus in model organisms. In cases where proteases have very loose consensus like metalloproteinase ADAM10[@CaescuBJ20090549] that is arguably best-known for its protective effects in prion diseases like mad cow in cattle, additional structural factors and contexts may need to be taken into consideration. Additionally, the efficacy of <code>substrateminer</code> investigative power expanding beyond well-studied organisms is limited by the availability of a comprehensive proteome database for underlying species. In the future, we aim to expand the scope of <code>substrateminer</code> to scrutinise substrate structural characteristics and provide a more comprehensive suite of tools for substrate investigation.</p>
+<h1 id="conflict-of-interests">Conflict of Interests</h1>
+<p>The author declares no conflict of interests.</p>
+<h1 id="references">References</h1>
+
+</body>
+
+</html>
