@@ -7,4 +7,5 @@ show_downloads: true
 logo: /assets/png/logo-2.jpg
 show_downloads: false
 
-google_analytics_id: G-M596PKG87V
+## no longer support GA4 since 2024+
+# google_analytics: G-M596PKG87V
